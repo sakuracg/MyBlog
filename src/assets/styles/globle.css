@@ -1,0 +1,204 @@
+html,
+body {
+    background: #efefef;
+}
+
+a {
+    color: #444;
+}
+
+.inline-block {
+    display: inline-block;
+}
+/* 容器 */
+.container {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+/* 左上角类型标签格式 */
+/* .ui.label {
+    margin: 5px 0 15px 2px;
+    font-size: 15px;
+    position: relative;
+    left: -32px;
+    border-radius: 0 4px 4px 0;
+    padding: 7px 11.2px 7px 32px;
+    display: inline-block;
+    color: #fff;
+    border-color: #97dffd;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+        0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+        0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    background-color: #97dffd;
+}
+
+.ui.label::after {
+    position: absolute;
+    content: '';
+    top: 100%;
+    left: 0;
+    border-top: 0 solid transparent;
+    border-right-width: 1em;
+    border-right-color: #48456d;
+    border-right-style: solid;
+    border-bottom: 1em solid transparent;
+    border-left: 0 solid transparent;
+    width: 0;
+    height: 0;
+}
+.ui.label a {
+    color: #fff;
+}
+
+/* 左上角日期格式 */
+/* .tcommonBox {
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+    position: relative;
+    background: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 40px;
+    font-size: 15px;
+}
+.tcommonBox .s-round-date {
+    position: absolute;
+    top: -20px;
+    left: -35px;
+    height: 60px;
+    width: 70px;
+    padding-top: 10px;
+    border-radius: 100px;
+    color: #fff;
+    background: #97dffd;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+        0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+        0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.tcommonBox .s-round-date span {
+    display: block;
+    text-align: center;
+}
+.tcommonBox .s-round-date .day {
+    margin-top: 4px;
+    font-size: 30px;
+    font-weight: 700;
+} */
+
+/* 阅读全文格式 */
+.view-detail {
+    overflow: hidden;
+    margin-top: 10px;
+    line-height: 24px;
+    text-align: center;
+}
+
+.view-detail a {
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* .tcolors-bg {
+    background: #97dffd;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.tcolors-bg:hover {
+    background: #48456d;
+} */
+
+.more {
+    margin-top: 40px;
+    padding: 5px 0;
+    border-radius: 12px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* 清除浮动 */
+.clearfix {
+    *zoom: 1;
+}
+
+.clearfix::after {
+    height: 0;
+    display: block;
+    visibility: hidden;
+    clear: both;
+    content: '';
+}
+
+/* a 链接 */
+.a-label {
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+}
+
+/* .a-label:hover {
+    color: lightblue;
+} */
+
+/* 兼容 */
+@media screen and (max-width: 768px) {
+    .is-pc {
+        display: none;
+    }
+    .is-mobile {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .is-mobile {
+        display: none;
+    }
+    /* 弹窗 */
+    .el-message-box__wrapper {
+        position: fixed;
+        top: 50%;
+        /* bottom: 0; */
+        left: 50%;
+        /* right: 0; */
+        /* text-align: center; */
+        transform: translate(-17%, -50%);
+    }
+    .el-message-box {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        max-width: 94% !important;
+        /* margin:0 5px; */
+        padding: 0 8px;
+    }
+    .s-round-date {
+        width: 0 !important;
+    }
+    .ui.label {
+        left: -18px !important;
+        padding-left: 18px !important;
+        margin: 5px;
+    }
+    .ui.label::after {
+        border: none !important;
+    }
+    .toTop {
+        display: none !important;
+    }
+    /* 隐藏上滑图标 */
+    .hidden {
+        display: none !important;
+    }
+}
