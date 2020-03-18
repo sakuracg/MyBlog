@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="bg"></div>
+    <!-- 动态背景 -->    
+    <wxz-dy></wxz-dy>
     <div class="container">
       <h1 class="loginTitle">
         <span>主银，要进入异世界了么？</span>
@@ -194,9 +196,13 @@
 </template>
 
 <script>
+import DynamicBg from '../components/DynamicBg'
 import { UserLogin, Register, TransmitEmail, AlterInfo } from '../util/server'
 export default {
   name: 'Login',
+  components: {    
+    'wxz-dy': DynamicBg
+  },
   data () {
     // 自定义验证规则    
     let validateEmail = (rule, value, callback) => {

@@ -11,7 +11,7 @@
 export default {
   name: 'App',
   data () {
-    return {      
+    return {
     }
   },
   created () {
@@ -24,12 +24,19 @@ export default {
     window.addEventListener("beforeunload", () => {
       sessionStorage.setItem("store", JSON.stringify(this.$store.state))
     })
+  },
+  mounted () {
+    // 加载主题
+    if (localStorage.getItem('theme')) {
+      document.querySelector('#app').className = localStorage.getItem('theme');
+    } else {
+      document.querySelector('#app').className = 'theme1'
+    }
   }
 }
 </script>
 
 <style lang="less">
-@import "assets/styles/subject.less";
 /* 左上角类型标签格式 */
 .ui.label {
   margin: 5px 0 15px 2px;
@@ -39,13 +46,13 @@ export default {
   border-radius: 0 4px 4px 0;
   padding: 7px 11.2px 7px 32px;
   display: inline-block;
-  color: @fontColor;
-  border-color: @iconBg;
+  // color: @fontColor;
+  // border-color: @iconBg;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  background-color: @iconBg;
+  // background-color: @iconBg;
 }
 
 .ui.label::after {
@@ -55,7 +62,7 @@ export default {
   left: 0;
   border-top: 0 solid transparent;
   border-right-width: 1em;
-  border-right-color: @iconHoverBg;
+  // border-right-color: @iconHoverBg;
   border-right-style: solid;
   border-bottom: 1em solid transparent;
   border-left: 0 solid transparent;
@@ -63,7 +70,7 @@ export default {
   height: 0;
 }
 .ui.label a {
-  color: @fontColor;
+  // color: @fontColor;
 }
 
 /* 左上角日期格式 */
@@ -86,7 +93,7 @@ export default {
   width: 70px;
   padding-top: 10px;
   border-radius: 100px;
-  color: @fontColor;
+  // color: @fontColor;
   background: #97dffd;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -106,25 +113,25 @@ export default {
 
 /* 阅读全文格式 */
 .tcolors-bg {
-  background: @iconBg;
+  // background: @iconBg;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
-.tcolors-bg:hover {
-  background: @iconHoverBg;
-}
+// .tcolors-bg:hover {
+//   background: @iconHoverBg;
+// }
 
-.a-label:hover {
-  color: @fontHoverColor;
-}
+// .a-label:hover {
+//   color: @fontHoverColor;
+// }
 
 /* iconfont */
 .icon {
   width: 16px;
   height: 16px;
   vertical-align: -0.15em;
-  fill: @fontColor;
+  // fill: @fontColor;
   overflow: hidden;
 }
 </style>

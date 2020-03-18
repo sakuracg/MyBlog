@@ -254,6 +254,29 @@ const getBlogAllComments = async (aid, pageId, pageSize, callback) => {
   })
   callback && callback(res)
 }
+
+// 增加留言板的留言
+const AddSendMessage = async (content, callback) => {
+  let url = 'message/addMessage'
+  const { data: res } = await axios.post(url, {
+    content
+  })
+  callback && callback(res)
+}
+
+// 用户撤回留言
+const DelMessage = async(callback) =>{
+  let url = 'message/delMessage'
+  const { data: res } = await axios.post(url)
+  callback && callback(res)
+}
+
+// 得到所有留言板的留言
+const ShowAllMessage = async (callback) => {
+  let url = 'message'
+  const { data: res } = await axios.get(url)
+  callback && callback(res)
+}
 export {
   InitDate,  // 格式化时间函数
   GetArticalAll,  // 得到博客列表
@@ -278,4 +301,7 @@ export {
   getAllArtCollect, // 得到用户所有的收藏
   sendArticalComment,  // 发送留言
   getBlogAllComments,  // 得到博客所有的留言
+  AddSendMessage,  // 留言板的留言
+  ShowAllMessage,   // 得到所有留言板的留言
+  DelMessage, // 用户撤回先前的留言
 }

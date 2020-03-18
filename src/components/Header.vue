@@ -45,13 +45,33 @@
                   </svg>
                   <a href="javascript:;">切换主题</a>
                   <ul class="s-sub-link">
-                    <li
-                      class="s-sub-link-item"
-                      @click="changeSubject(s_item)"
-                      v-for="(s_item, index) in subject"
-                      :key="index"
-                    >
-                      <a href="javascript:;">{{ s_item.name }}</a>
+                    <!-- 是否开启背景图轮播 -->
+                    <li></li>
+                    <li class="s-sub-link-item" @click="changeSubject(1)">
+                      <a href="javascript:;">海贼王</a>
+                    </li>
+                    <li class="s-sub-link-item" @click="changeSubject(2)">
+                      <a href="javascript:;">春物</a>
+                    </li>
+                    <li class="s-sub-link-item" @click="changeSubject(3)">
+                      <a href="javascript:;">路人女主</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="sub-link-item">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#iconbeijingbu"></use>
+                  </svg>
+                  <a href="javascript:;">动态背景</a>
+                  <ul class="s-sub-link">
+                    <li class="s-sub-link-item" @click="changeDynamicBG('0')">
+                      <a href="javascript:;">关闭背景</a>
+                    </li>
+                    <li class="s-sub-link-item" @click="changeDynamicBG('1')">
+                      <a href="javascript:;">动态粒子</a>
+                    </li>
+                    <li class="s-sub-link-item" @click="changeDynamicBG('2')">
+                      <a href="javascript:;">上升水球</a>
                     </li>
                   </ul>
                 </li>
@@ -167,7 +187,10 @@
           >
         </div>
         <div v-show="haslogin" class="haslogin">
-          <el-avatar class="avatar-img" :src="userInfo.image"></el-avatar>
+          <el-avatar
+            class="avatar-img"
+            :src="userInfo.image"
+          ></el-avatar>
           <ul class="haslogin-info">
             <li>
               <router-link :to="{ name: 'UserInfo' }">个人中心</router-link>
@@ -242,10 +265,6 @@ export default {
       going: false, // 是否向上滑动
       isMobile: false,
       pMenu: false,
-      subject: [
-        { name: '海贼王', iconBg: '#97dffd', iconHoverBg: '#48456D', fontColor: '#fff', fontHoverColor: 'lightblue', headerBg: '~static/images/haizeiwang.jpg' },
-        { name: '路人女主', iconBg: '#F16389', iconHoverBg: '#EDBCC9', fontColor: '#fff', fontHoverColor: 'lightblue', headerBg: '~static/images/chunwu.jpg' },
-      ]
     }
   },
   watch: {
@@ -260,6 +279,7 @@ export default {
       //   console.log(this.$refs.headerBg)      
       // this.$refs.headerBg.style.backgroundImage = "url(" + require("static/images/" + num + ".jpg") + ")"
       //   console.log(this.$refs.headerBg.style.backgroundImage)
+      // this.$refs.userImageRef.src = userInfo.image
     })
 
     // 判断登录是否过期    bug  不能直接退出    
@@ -271,11 +291,11 @@ export default {
         this.haslogin = this.$store.state.haslogin = false
       } else {
         this.haslogin = this.$store.state.haslogin = true
+        this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+        // console.log(this.userInfo)          
       }
     })
-    if (this.$store.state.haslogin) {
-      this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
-    }
+
     this.routeChange()
 
     // 判断上滑  
@@ -368,23 +388,22 @@ export default {
         }
       }, 15)
     },
-
     // 修改主题
-    changeSubject (item) {
-      less.modifyVars({
-        '@iconBg': item.iconBg,
-        '@iconHoverBg': item.iconHoverBg,
-        '@fontColor': item.fontColor,
-        '@fontHoverColor': item.fontHoverColor,
-        '@headerBg': item.headerBg,
-      });
+    changeSubject (num) {
+      document.querySelector('#app').className = 'theme' + num;
+      localStorage.setItem('theme', document.querySelector('#app').className)
+    },
+    // 动态背景
+    changeDynamicBG (num) {
+      this.$store.state.dynamicBg = num
+      // console.log(this.$store.state.dynamicBg)
+      localStorage.setItem('dynamicBg', num)
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-@import url("~@/assets/styles/subject.less");
 /* 导航栏样式 */
 .nav-header {
   width: 80%;
@@ -409,7 +428,7 @@ export default {
         margin-right: 5px;
       }
       a {
-        color: #fff;
+        // color: #fff;
         font-size: 14px;
       }
     }
@@ -431,21 +450,16 @@ export default {
         &:hover .s-sub-link {
           display: block;
         }
-        &:hover .icon {
-          fill: @fontHoverColor;
-        }
-        &:hover > a {
-          color: @fontHoverColor;
-        }
-        .icon {
-          margin-right: 4px;
-          fill: @fontColor;
-        }
-        a {
-          color: @fontColor;
-          &:hover {
-            color: @fontHoverColor;
-          }
+        &:hover::before {
+          margin-top: 8px;
+          position: absolute;
+          right: -20px;
+          content: "";
+          width: 0;
+          height: 0;
+          border-width: 10px;
+          border-style: solid;
+          border-color: transparent transparent transparent rgba(0, 0, 0, 0.4);
         }
       }
       &::before {
@@ -462,7 +476,7 @@ export default {
     .s-sub-link {
       position: absolute;
       top: 0;
-      left: 120px;
+      left: 110px;
       width: 100px;
       background: rgba(0, 0, 0, 0.4);
       border-radius: 0 0 4px 4px;
@@ -471,17 +485,6 @@ export default {
       display: none;
       .s-sub-link-item {
         line-height: 34px;
-      }
-      &::before {
-        position: absolute;
-        top: 5px;
-        left: -20px;
-        content: "";
-        width: 0;
-        height: 0;
-        border-width: 10px;
-        border-style: solid;
-        border-color: transparent transparent transparent rgba(0, 0, 0, 0.4);
       }
     }
   }
@@ -631,10 +634,11 @@ export default {
   position: relative;
   width: 100%;
   height: 650px;
-  background-image: url("@{headerBg}");
+  // background-image: url("@{headerBg}");
   background-position: center 50%;
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: 111;
   .time {
     position: absolute;
     top: 40px;
@@ -781,7 +785,7 @@ export default {
   position: fixed;
   right: 40px;
   top: -300px;
-  z-index: 99;
+  z-index: 999;
   width: 70px;
   height: 900px;
   transition: all 0.5s 0.3s ease-in-out;

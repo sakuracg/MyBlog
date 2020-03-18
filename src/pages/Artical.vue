@@ -3,6 +3,9 @@
     <!-- 公共头 -->
     <wxz-header></wxz-header>
 
+    <!-- 动态背景 -->    
+    <wxz-dy></wxz-dy>
+
     <el-container class="container" id="detail">
       <el-row :gutter="30">
         <!-- 右边个人信息消失 移动到最下面时 有动画  不尴尬 -->
@@ -26,6 +29,7 @@
 </template>
 
 <script>
+import DynamicBg from '../components/DynamicBg'
 import Header from '../components/Header'
 import DetailArtical from '../components/DetailArtical'
 import RightAside from '../components/RightAside'
@@ -39,7 +43,8 @@ export default {
     'wxz-detail': DetailArtical,
     'wxz-rightlist': RightAside,
     'wxz-message': Message,
-    'wxz-footer': Footer
+    'wxz-footer': Footer,
+    'wxz-dy': DynamicBg
   },
   mounted () {
     let detail = document.querySelector('#detail')

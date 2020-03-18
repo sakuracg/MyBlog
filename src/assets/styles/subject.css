@@ -1,0 +1,166 @@
+.theme1 {
+  /* 左上角类型标签格式 */
+  /* 左上角日期格式 */
+  /* 阅读全文格式 */
+  /* iconfont */
+}
+.theme1 .ui.label {
+  color: #fff;
+  border-color: #97dffd;
+  background-color: #97dffd;
+}
+.theme1 .ui.label::after {
+  border-right-color: #48456d;
+}
+.theme1 .ui.label a {
+  color: #fff;
+}
+.theme1 .tcommonBox .s-round-date {
+  color: #fff;
+  background: #97dffd;
+}
+.theme1 .tcolors-bg {
+  background: #97dffd;
+}
+.theme1 .tcolors-bg:hover {
+  background: #48456d;
+}
+.theme1 .a-label:hover {
+  color: lightblue;
+}
+.theme1 .icon {
+  fill: #fff;
+}
+.theme1 .nav-header .nav-link-item .box:hover .icon {
+  fill: lightblue;
+}
+.theme1 .nav-header .nav-link-item .box:hover > a {
+  color: lightblue;
+}
+.theme1 .nav-header .nav-link-item .box .icon {
+  fill: #fff;
+}
+.theme1 .nav-header .nav-link-item .box a {
+  color: #fff;
+}
+.theme1 .nav-header .nav-link-item .sub-link .sub-link-item:hover .icon {
+  fill: lightblue;
+}
+.theme1 .nav-header .nav-link-item .sub-link .sub-link-item:hover > a {
+  color: lightblue;
+}
+.theme1 .nav-header .nav-link-item .sub-link .sub-link-item .icon {
+  margin-right: 4px;
+  fill: #fff;
+}
+.theme1 .nav-header .nav-link-item .sub-link .sub-link-item a {
+  color: #fff;
+}
+.theme1 .nav-header .nav-link-item .sub-link .sub-link-item a:hover {
+  color: lightblue;
+}
+.theme1 .header-bg {
+  background-image: url('~static/images/haizeiwang.jpg');
+}
+.theme1 .active {
+  background: deepskyblue !important;
+}
+.theme1 .artical-type .shareclassTwo li a {
+  background: lightblue;
+}
+.theme1 .article-box .like-col-box .like-box,
+.theme1 .article-box .like-col-box .collect-box {
+  color: #fff;
+  background: lightblue;
+}
+.theme1 .article-box .like-col-box .like-box:hover,
+.theme1 .article-box .like-col-box .collect-box:hover {
+  background: #c668d3;
+}
+.theme1 .article-box .like-col-box .like-box.yes,
+.theme1 .article-box .like-col-box .collect-box.yes {
+  background: lightblue;
+}
+.theme2 {
+  /* 左上角类型标签格式 */
+  /* 左上角日期格式 */
+  /* 阅读全文格式 */
+  /* iconfont */
+}
+.theme2 .ui.label {
+  color: red;
+  border-color: #f16389;
+  background-color: #f16389;
+}
+.theme2 .ui.label::after {
+  border-right-color: #edbcc9;
+}
+.theme2 .ui.label a {
+  color: red;
+}
+.theme2 .tcommonBox .s-round-date {
+  color: red;
+  background: #f16389;
+}
+.theme2 .tcolors-bg {
+  background: #f16389;
+}
+.theme2 .tcolors-bg:hover {
+  background: #edbcc9;
+}
+.theme2 .a-label:hover {
+  color: lightblue;
+}
+.theme2 .icon {
+  fill: red;
+}
+.theme2 .nav-header .nav-link-item .box:hover .icon {
+  fill: lightblue;
+}
+.theme2 .nav-header .nav-link-item .box:hover > a {
+  color: lightblue;
+}
+.theme2 .nav-header .nav-link-item .box .icon {
+  fill: red;
+}
+.theme2 .nav-header .nav-link-item .box a {
+  color: red;
+}
+.theme2 .nav-header .nav-link-item .sub-link .sub-link-item:hover .icon {
+  fill: lightblue;
+}
+.theme2 .nav-header .nav-link-item .sub-link .sub-link-item:hover > a {
+  color: lightblue;
+}
+.theme2 .nav-header .nav-link-item .sub-link .sub-link-item .icon {
+  margin-right: 4px;
+  fill: red;
+}
+.theme2 .nav-header .nav-link-item .sub-link .sub-link-item a {
+  color: red;
+}
+.theme2 .nav-header .nav-link-item .sub-link .sub-link-item a:hover {
+  color: lightblue;
+}
+.theme2 .header-bg {
+  background-image: url('~static/images/chunwu.jpg');
+}
+.theme2 .active {
+  background: deepskyblue !important;
+}
+.theme2 .artical-type .shareclassTwo li a {
+  background: lightblue;
+}
+.theme2 .article-box .like-col-box .like-box,
+.theme2 .article-box .like-col-box .collect-box {
+  color: red;
+  background: lightblue;
+}
+.theme2 .article-box .like-col-box .like-box:hover,
+.theme2 .article-box .like-col-box .collect-box:hover {
+  background: #c668d3;
+}
+.theme2 .article-box .like-col-box .like-box.yes,
+.theme2 .article-box .like-col-box .collect-box.yes {
+  background: lightblue;
+}

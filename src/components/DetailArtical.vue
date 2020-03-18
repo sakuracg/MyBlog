@@ -234,16 +234,16 @@ export default {
     padding: 0 12px;
     height: 35px;
     line-height: 35px;
-    color: #fff;
-    background: lightblue;
+    // color: #fff;
+    // background: lightblue;
     border-radius: 14px;
     cursor: pointer;
-    &:hover {
-      background: #c668d3;
-    }
-    &.yes {
-      background: #c668d3;
-    }
+    // &:hover {
+    //   background: #c668d3;
+    // }
+    // &.yes {
+    //   background: #c668d3;
+    // }
   }
 }
 </style>

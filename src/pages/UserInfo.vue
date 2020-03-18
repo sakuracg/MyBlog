@@ -1,6 +1,10 @@
 <template>
   <div>
     <wxz-header></wxz-header>
+
+    <!-- 动态背景 -->
+    <wxz-dy></wxz-dy>
+
     <div class="container">
       <div v-show="!isEdit" class="tcommonBox">
         <header>
@@ -169,6 +173,7 @@
 </template>
 
 <script>
+import DynamicBg from '../components/DynamicBg'
 import header from '../components/Header'
 import footer from '../components/Footer'
 import { GetUserInfo, SaveUserInfo, SaveUserImg, judgeUniqueUsername, FormatDate } from '../util/server'
@@ -177,7 +182,8 @@ export default {
   name: 'UserInfo',
   components: {
     'wxz-header': header,
-    'wxz-footer': footer
+    'wxz-footer': footer,
+    'wxz-dy': DynamicBg
   },
   data () {
     return {
@@ -281,7 +287,7 @@ export default {
       })
     },
     returnisEdit () {
-      this.isEdit = !this.isEdit      
+      this.isEdit = !this.isEdit
       if (_Mobile()) {
         window.scrollTo(0, 0)
       } else {

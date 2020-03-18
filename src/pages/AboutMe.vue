@@ -2,6 +2,10 @@
   <div>
     <!-- 公共头 -->
     <wxz-header></wxz-header>
+
+    <!-- 动态背景 -->    
+    <wxz-dy></wxz-dy>
+
     <div class="container">
       <el-row :gutter="30">
         <el-col
@@ -23,6 +27,7 @@
 </template>
 
 <script>
+import DynamicBg from '../components/DynamicBg'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import RightAside from '../components/RightAside'
@@ -34,6 +39,7 @@ export default {
     'wxz-footer': Footer,
     'wxz-rightlist': RightAside,
     'wxz-about': About,
+    'wxz-dy': DynamicBg
   }
 }
 </script>

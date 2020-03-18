@@ -1,6 +1,10 @@
 <template>
   <div>
     <wxz-header></wxz-header>
+
+    <!-- 动态背景 -->    
+    <wxz-dy></wxz-dy>
+
     <div class="container tcommonBox">
       <div class="slider">
         <ul>
@@ -35,6 +39,7 @@
 </template>
 
 <script>
+import DynamicBg from '../components/DynamicBg'
 import header from '../components/Header'
 import footer from '../components/Footer'
 
@@ -42,7 +47,8 @@ export default {
   name: 'LikeCollect',
   components: {
     'wxz-header': header,
-    'wxz-footer': footer
+    'wxz-footer': footer,   
+    'wxz-dy': DynamicBg
   },
   data () {
     return {

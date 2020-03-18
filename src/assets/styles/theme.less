@@ -1,0 +1,114 @@
+.theme(
+@iconBg: #97dffd, 
+@iconHoverBg: #48456d,
+@alSecBg: lightblue,
+@alSecHovBg: deepskyblue,
+@favorBg: lightblue,
+@favorHovBg: #c668d3,
+@fontColor: #fff, 
+@fontHoverColor: lightblue,
+@headerBg: '~static/images/haizeiwang.jpg') {
+  /* 左上角类型标签格式 */
+  .ui.label {
+    color: @fontColor;
+    border-color: @iconBg;
+    background-color: @iconBg;
+  }
+
+  .ui.label::after {
+    border-right-color: @iconHoverBg;
+  }
+
+  .ui.label a {
+    color: @fontColor;
+  }
+
+  /* 左上角日期格式 */
+  .tcommonBox .s-round-date {
+    color: @fontColor;
+    background: @iconBg;
+  }
+
+  /* 阅读全文格式 */
+  .tcolors-bg {
+    background: @iconBg;
+  }
+
+  .tcolors-bg:hover {
+    background: @iconHoverBg;
+  }
+
+  .a-label:hover {
+    color: @fontHoverColor;
+  }
+
+  /* iconfont */
+  .icon {
+    fill: @fontColor;
+  }
+
+  // 头部导航栏
+  .nav-header .nav-link-item {
+    .box {
+      &:hover .icon {
+        fill: @fontHoverColor;
+      }
+      &:hover > a {
+        color: @fontHoverColor;
+      }
+      .icon {
+        fill: @fontColor;
+      }
+      a {
+        color: @fontColor;
+      }
+    }
+    .sub-link .sub-link-item {
+      &:hover .icon {
+        fill: @fontHoverColor;
+      }
+      &:hover > a {
+        color: @fontHoverColor;
+      }
+      .icon {
+        margin-right: 4px;
+        fill: @fontColor;
+      }
+      a {
+        color: @fontColor;
+        &:hover {
+          color: @fontHoverColor;
+        }
+      }
+    }
+  }
+
+  // 背景图
+  .header-bg {
+    background-image: url('@{headerBg}');
+  }
+
+  //二级分类样式
+  .active {
+    background: @alSecHovBg !important;
+  }
+
+  .artical-type .shareclassTwo li a {
+    background: @alSecBg;
+  }
+
+  // 点赞 收藏样式
+  .article-box .like-col-box {
+    .like-box,
+    .collect-box {
+      color: @fontColor;
+      background: @favorBg;
+      &:hover {
+        background: @favorHovBg;
+      }
+      &.yes {
+        background: @favorBg;
+      }
+    }
+  }
+}

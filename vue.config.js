@@ -6,7 +6,7 @@ module.exports = {
     publicPath: '/',
     outputDir: 'dist',
     lintOnSave: false,
-    devServer: {
+    devServer: { 
         proxy: {
             '/api/': {
                 target: 'http://localhost:8001',  // target host
@@ -27,18 +27,18 @@ module.exports = {
         config.resolve.alias
             .set('static', resolve('static'))
     },
-    configureWebpack: config => {
-        config.module.rules.push({
-            // 处理markdown文件
-            test: /\.md$/,
-            use: [
-                {
-                    loader: "html-loader"
-                },
-                {
-                    loader: "markdown-loader"
-                }
-            ]
-        })
-    }
+    // configureWebpack: config => {
+    //     config.module.rules.push({
+    //         // 处理markdown文件
+    //         test: /\.md$/,
+    //         use: [
+    //             {
+    //                 loader: "html-loader"
+    //             },
+    //             {
+    //                 loader: "markdown-loader"
+    //             }
+    //         ]
+    //     })
+    // }
 }

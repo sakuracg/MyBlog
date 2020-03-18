@@ -1,7 +1,19 @@
-// 默认主题是春物的
-@iconBg: #97dffd;
-@iconHoverBg: #48456D;
-@fontColor: #fff;
-@fontHoverColor: lightblue;
-@headerBg: '~static/images/haizeiwang.jpg';
+@import url('./theme.less');
 
+.theme1 {
+  .theme(); // 默认样式  海贼王
+}
+
+.theme2 {
+  .theme(
+    #f16389,
+    #edbcc9,
+    lightblue,
+    deepskyblue,
+    lightblue,
+    #c668d3,
+    red,
+    lightblue,
+    '~static/images/chunwu.jpg'
+  ); // 春物
+}
