@@ -56,7 +56,7 @@
             </div>
             <!-- 处理取消点赞 -->
             <div class="op">
-              <el-button round>
+              <el-button round @click="cancelLike(blog.id, 1, false)">
                 取消点赞
               </el-button>
             </div>
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { getAllArtLike } from '../util/server'
+import { getAllArtLike, updateArtLikeColl } from '../util/server'
 export default {
   name: 'Like',
   data () {
@@ -77,8 +77,8 @@ export default {
       getTechLike: [],
       getNovelLike: [],
       getAnimeLike: [],
-      currentLike: [],   // 当前展示的喜欢 
-      currentStyle: 0,  // 展示当前的博客类型的样式     
+      currentLike: [], // 当前展示的喜欢 
+      currentStyle: 0 // 展示当前的博客类型的样式     
     }
   },
   created () {
@@ -117,6 +117,14 @@ export default {
           this.getAnimeLike.push(blog)
         }
       }
+    },
+    cancelLike (aid, type, status) {
+      updateArtLikeColl(aid, type, status, status, res => {
+        if (res.errorCode === 0) {
+          this.$message.success('已取消点赞')
+          this.getAllLikeBlog()
+        }
+      })
     }
   }
 }
@@ -133,10 +141,10 @@ export default {
   .sort-item {
     display: inline-block;
     margin-right: 64px;
-    &.active {
-      color: lightblue;
-      border-bottom: 2px solid lightblue;
-    }
+    // &.active {
+    // color: lightblue;
+    // border-bottom: 2px solid lightblue;
+    // }
   }
 }
 .all-blog-main {

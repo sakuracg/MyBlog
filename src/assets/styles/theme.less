@@ -7,6 +7,10 @@
 @favorHovBg: #c668d3,
 @fontColor: #fff, 
 @fontHoverColor: lightblue,
+@commentColor: lightblue,
+@userInfoColor:rgb(101, 200, 233),
+@userInfoLikeStatus: lightblue,
+@aboutmeColor: lightblue,
 @headerBg: '~static/images/haizeiwang.jpg') {
   /* 左上角类型标签格式 */
   .ui.label {
@@ -38,6 +42,9 @@
     background: @iconHoverBg;
   }
 
+  .a-label {
+    color: @fontColor;
+  }
   .a-label:hover {
     color: @fontHoverColor;
   }
@@ -88,13 +95,14 @@
     background-image: url('@{headerBg}');
   }
 
-  //二级分类样式
-  .active {
-    background: @alSecHovBg !important;
-  }
-
-  .artical-type .shareclassTwo li a {
-    background: @alSecBg;
+  // 博客列表二级分类样式
+  .artical-type .shareclassTwo {
+    li a {
+      background: @alSecBg;
+    }
+    .active {
+      background: @alSecHovBg !important;
+    }
   }
 
   // 点赞 收藏样式
@@ -107,8 +115,42 @@
         background: @favorHovBg;
       }
       &.yes {
-        background: @favorBg;
+        background: @favorHovBg;
       }
     }
+  }
+
+  // 评论区头部样式
+  .msg-box .msg-comments .msg-comments-tip {
+    border-left: 2px solid @commentColor;
+    color: @commentColor;
+  }
+
+  // 用户信息
+  .userinfo-box li span:nth-child(2) {
+    color: @userInfoColor;    
+  }
+
+  // 喜欢和收藏列表 左边背景
+  .slider li a {
+    &.active {
+      background: @userInfoLikeStatus;
+      &::after {
+        border-left: 15px solid @userInfoLikeStatus;
+      }
+    }
+  }
+
+  // 喜欢以及收藏的导航栏
+  .lc-tab .sort-item {
+    &.active {
+      color: @userInfoLikeStatus;
+      border-bottom: 2px solid @userInfoLikeStatus;
+    }
+  }
+
+  // 关于我页面
+  .tcommonBox > header > h1 .aboutme {
+    color: @aboutmeColor;
   }
 }

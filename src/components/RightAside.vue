@@ -17,7 +17,9 @@
             placement="top"
             :enterable="false"
           >
-            <a href="javascript;;"><i class="iconfont iconGitHub"></i></a>
+            <a href="https://github.com/sakuracg" target="_blank"
+              ><i class="iconfont iconGitHub"></i
+            ></a>
           </el-tooltip>
           <el-tooltip
             class="item"
@@ -53,16 +55,18 @@
     <section class="message">
       <h2 class="ui label">留言板</h2>
       <ul>
-        <li class="message-item">
-          <a href="javascript:;">
-            <div class="message-avatar">
-              <img :src="'http://localhost:8080/img/1.jpg'" alt="12" />
-            </div>
-            <div class="message-content">
-              <p class="content-author">王小志</p>
-              <p class="content-text">我说你是猪</p>
-            </div>
-          </a>
+        <li
+          class="message-item"
+          v-for="(item, index) of lastestMessage"
+          :key="index"
+        >          
+          <div class="message-avatar">
+            <img :src="item.user.image" alt="~static/images/avator.jpg" />
+          </div>
+          <div class="message-content">
+            <p class="content-author">{{ item.user.username }}}</p>
+            <p class="content-text">{{ item.content }}</p>
+          </div>
         </li>
       </ul>
     </section>
@@ -90,18 +94,23 @@
 </template>
 
 <script>
-import { ShowBrowseMaxBlog } from '../util/server'
+import { ShowBrowseMaxBlog, ShowLastestMessage } from '../util/server'
 export default {
   name: 'RightAside',
   data () {
     return {
       blogBrowseList: [],
+      lastestMessage: []
     }
   },
   created () {
     //   查询浏览最多的十条记录
     ShowBrowseMaxBlog(data => {
       this.blogBrowseList = data
+    })
+    // 查询最新的留言板的留言
+    ShowLastestMessage(data => {      
+      this.lastestMessage = data
     })
   },
   methods: {
@@ -199,7 +208,7 @@ export default {
   line-height: 20px;
 }
 
-.message .message-item a {
+.message .message-item {
   margin: 5px 0;
   display: block;
   padding: 5px;
@@ -208,7 +217,7 @@ export default {
   color: #444;
 }
 
-.message .message-item a:hover {
+.message .message-item:hover {
   background: rgba(230, 244, 250, 0.5);
   border-radius: 5px;
 }

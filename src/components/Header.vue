@@ -39,7 +39,7 @@
               </svg>
               <a href="javascript:;">实验室</a>
               <ul class="sub-link clearfix">
-                <li class="sub-link-item">
+                <li class="sub-link-item be">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#iconzhuti_tiaosepan_o"></use>
                   </svg>
@@ -58,7 +58,7 @@
                     </li>
                   </ul>
                 </li>
-                <li class="sub-link-item">
+                <li class="sub-link-item be">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#iconbeijingbu"></use>
                   </svg>
@@ -138,14 +138,9 @@
               </svg>
               <a href="javascript:;">实验室</a>
             </div>
-          </li>
-          <li class="nav-link-item-m">
-            <div class="box">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#iconliuyan2"></use>
-              </svg>
-              <router-link :to="{ name: 'MessageBoard' }">留言板</router-link>
-            </div>
+            <ul class="sub-link clearfix">
+              <li class="sub-link-item" style="color: lightblue;">更多功能见电脑端</li>
+            </ul>
           </li>
           <li class="nav-link-item-m">
             <div class="box">
@@ -187,10 +182,7 @@
           >
         </div>
         <div v-show="haslogin" class="haslogin">
-          <el-avatar
-            class="avatar-img"
-            :src="userInfo.image"
-          ></el-avatar>
+          <el-avatar class="avatar-img" :src="userInfo.image"></el-avatar>
           <ul class="haslogin-info">
             <li>
               <router-link :to="{ name: 'UserInfo' }">个人中心</router-link>
@@ -264,7 +256,7 @@ export default {
       gotoTop: false,
       going: false, // 是否向上滑动
       isMobile: false,
-      pMenu: false,
+      pMenu: false
     }
   },
   watch: {
@@ -272,19 +264,13 @@ export default {
   },
   created () {
     this.isMobile = _Mobile()
-    // console.log('isMob@ile: ', this.isMobile)
     //   更换头部图片
     this.$nextTick(() => {
       let num = Math.floor(Math.random() * 15 + 2)
-      //   console.log(this.$refs.headerBg)      
-      // this.$refs.headerBg.style.backgroundImage = "url(" + require("static/images/" + num + ".jpg") + ")"
-      //   console.log(this.$refs.headerBg.style.backgroundImage)
-      // this.$refs.userImageRef.src = userInfo.image
     })
 
     // 判断登录是否过期    bug  不能直接退出    
     VeriftToken(res => {
-      console.log(res.is_valid)
       if (!res.is_valid) {
         localStorage.removeItem('userInfo')
         localStorage.removeItem('token')
@@ -292,7 +278,6 @@ export default {
       } else {
         this.haslogin = this.$store.state.haslogin = true
         this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
-        // console.log(this.userInfo)          
       }
     })
 
@@ -317,17 +302,14 @@ export default {
   },
   methods: {
     routeChange () {
-      // 刷新登录界面的路由      
-      //   console.log(from)
+      // 刷新登录界面的路由 
       if (this.$store.state.refresh) {
-        console.log(22)
         window.location.reload()
         this.$store.state.refresh = false
       }
       let that = this
       ArticalCateList(data => {
         that.articalCateList = data
-        // console.log(data)        
       })
     },
     // 搜索模块
@@ -358,15 +340,14 @@ export default {
         this.$store.state.haslogin = false
         localStorage.removeItem('userInfo')
         localStorage.removeItem('token')
-        this.$router.push({ path: '/' }).catch(data => { })
-        // window.location.reload()
         this.$message({
-          type: 'info',
+          type: 'success',
           message: '勇者大人，下次再见'
         })
+        this.$router.push({ path: '/' }).catch(data => { })
       }).catch(action => {
         this.$message({
-          type: 'info',
+          type: 'success',
           message: '欢迎回来，勇者大人'
         })
       })
@@ -390,13 +371,12 @@ export default {
     },
     // 修改主题
     changeSubject (num) {
-      document.querySelector('#app').className = 'theme' + num;
+      document.querySelector('#app').className = 'theme' + num
       localStorage.setItem('theme', document.querySelector('#app').className)
     },
     // 动态背景
     changeDynamicBG (num) {
       this.$store.state.dynamicBg = num
-      // console.log(this.$store.state.dynamicBg)
       localStorage.setItem('dynamicBg', num)
     }
   }
@@ -450,7 +430,7 @@ export default {
         &:hover .s-sub-link {
           display: block;
         }
-        &:hover::before {
+        &.be:hover::before {
           margin-top: 8px;
           position: absolute;
           right: -20px;

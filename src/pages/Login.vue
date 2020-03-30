@@ -221,16 +221,16 @@ export default {
     }
     return {
       login: this.$route.params.type,
-      fullscreenLoading: false,  // 注册加载效果
+      fullscreenLoading: false, // 注册加载效果
       send: true, // 发送验证码
-      countDown: 120,  // 倒计时
+      countDown: 120, // 倒计时
       verifyCode: '', // 验证验证码是否正确
       showForm: true, // 展示登录验证
       countDown2: 3,
       loginFormInfo: {
         username: '',
         password: '',
-        type: 101,
+        type: 101
       },
       loginFormRules: {
         username: [
@@ -306,8 +306,7 @@ export default {
       this.$refs.loginFormRef.validate(valid => {
         if (!valid) return
         // 登录前获取 type  先不做呢因为都是普通用户
-        UserLogin(that.loginFormInfo, (res) => {
-          console.log(res)
+        UserLogin(that.loginFormInfo, (res) => {          
           if (res.data.errorCode) {
             that.$message.warning(res.data.msg)
           } else {
@@ -342,7 +341,6 @@ export default {
           return
         }
         Register(this.registerFormInfo, res => {
-          console.log(res)
           if (res.errorCode === 10400) {
             res.msg.forEach(msg => {
               setTimeout(() => {
@@ -385,7 +383,6 @@ export default {
         }
 
         AlterInfo(this.registerFormInfo, res => {
-          console.log(res)
           if (res.errorCode === 10400) {
             res.msg.forEach(msg => {
               setTimeout(() => {
@@ -424,7 +421,7 @@ export default {
             that.send = false
             clearTimeout(timer)
             timer = null
-          }, 5 * 60 * 1000);
+          }, 5 * 60 * 1000)
         })
       } else {
         that.$message.error('请输入邮箱')
@@ -464,7 +461,6 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  //   background: rgba(255, 255, 255, 0.5);
   .loginTitle {
     margin-bottom: 30px;
     text-align: center;

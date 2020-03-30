@@ -133,16 +133,16 @@ export default {
     return {
       textarea: '',
       sendTip: '发送啦',
-      aid: '',  // 回复当前博客的ID
+      aid: '', // 回复当前博客的ID
       commentId: '', // 当前评论的Id
-      pCommentId: '',  // 一级评论用户的ID
+      pCommentId: '', // 一级评论用户的ID
       pageId: 1, // 当前页 每页十条  检查是否累计加载还是 重新加载
       pageSize: 8,
-      isRespond: false,  // 是否显示取消回复 的文字
-      commentList: [],  // 评论列表数据
-      rId: '',   // 一级回复的user
-      puserId: '',  // 二级回复的ID
-      total: '',   // 评论总数
+      isRespond: false, // 是否显示取消回复 的文字
+      commentList: [], // 评论列表数据
+      rId: '', // 一级回复的user
+      puserId: '', // 二级回复的ID
+      total: '', // 评论总数
       hasMore: true,
       userTabs: [
         { type: 1, name: '霞之丘派' },
@@ -152,7 +152,7 @@ export default {
         { type: 5, name: '技术党' },
         { type: 6, name: '小萌新' },
         { type: 7, name: '埃罗芒阿老师党' }
-      ],
+      ]
     }
   },
   methods: {
@@ -221,7 +221,7 @@ export default {
         })
         this.commentList = []
       } else {
-        let info = res.data
+        let info = res.data        
         if (info.commentInfo.length > 0 && info.commentInfo.length < 8) {
           this.hasMore = false
         } else {
@@ -230,11 +230,10 @@ export default {
         this.total = more ? info.total : this.total + info.total
         this.commentList = more ? info.commentInfo : this.commentList.concat(info.commentInfo)
       }
-
     },
     removeRespond () {
-      this.isRespond = false;
-      this.$refs.msgBoxRef.insertBefore(this.$refs.respondRef, this.$refs.commentsRef);
+      this.isRespond = false
+      this.$refs.msgBoxRef.insertBefore(this.$refs.respondRef, this.$refs.commentsRef)
     },
     addMoreFun () {
       this.showCommentList(false)
@@ -242,7 +241,7 @@ export default {
     showSecCommentsUnflod (index) {
       let target = event.currentTarget
       target.style.display = 'none'
-      //   console.log(this.$refs['respondMsg' + index])
+      // console.log(this.$refs['respondMsg' + index])
       this.$refs['respondMsg' + index][0].style.display = 'block'
     },
     hideSecCommentsUnflod (index) {
@@ -322,9 +321,9 @@ export default {
       padding-left: 10px;
       height: 34px;
       line-height: 34px;
-      border-left: 2px solid lightblue;
+      // border-left: 2px solid lightblue;
       font-size: 18px;
-      color: lightblue;
+      // color: lightblue;
     }
     > .comments-list {
       margin-top: 30px;
@@ -422,14 +421,14 @@ export default {
     right: 35px;
     padding: 5px 8px;
     border-radius: 5px;
-  }  
+  }
   .no-comments {
-      margin: 40px auto;
-      min-height: 80px;
-      line-height: 80px;
-      text-align: center;
-      font-size: 22px;
-      color: #ccc;
+    margin: 40px auto;
+    min-height: 80px;
+    line-height: 80px;
+    text-align: center;
+    font-size: 22px;
+    color: #ccc;
   }
 }
 </style>

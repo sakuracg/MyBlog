@@ -52,7 +52,7 @@ export default {
   },
   data () {
     return {
-      currentStyle: '',
+      currentStyle: ''
     }
   },
   created () {
@@ -68,7 +68,7 @@ export default {
       this.currentStyle = this.$route.params.type
     },
     changeStyle1 (type) {
-      if (type == 'like') {
+      if (type === 'like') {
         this.currentStyle = 'like'
       } else {
         this.currentStyle = 'collect'
@@ -116,7 +116,7 @@ export default {
         font-size: 16px;
         &.active {
           color: #fff;
-          background: lightblue;
+          // background: lightblue;
           border-radius: 8px 0 0 8px;
           svg {
             color: #fff;
@@ -131,7 +131,7 @@ export default {
             height: 0;
             border-top: 25px solid #fff;
             border-bottom: 25px solid #fff;
-            border-left: 15px solid lightblue;
+            // border-left: 15px solid lightblue;
           }
         }
         svg {

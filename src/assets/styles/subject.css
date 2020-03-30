@@ -25,6 +25,9 @@
 .theme1 .tcolors-bg:hover {
   background: #48456d;
 }
+.theme1 .a-label {
+  color: #fff;
+}
 .theme1 .a-label:hover {
   color: lightblue;
 }
@@ -62,11 +65,11 @@
 .theme1 .header-bg {
   background-image: url('~static/images/haizeiwang.jpg');
 }
-.theme1 .active {
-  background: deepskyblue !important;
-}
 .theme1 .artical-type .shareclassTwo li a {
   background: lightblue;
+}
+.theme1 .artical-type .shareclassTwo .active {
+  background: deepskyblue !important;
 }
 .theme1 .article-box .like-col-box .like-box,
 .theme1 .article-box .like-col-box .collect-box {
@@ -81,6 +84,26 @@
 .theme1 .article-box .like-col-box .collect-box.yes {
   background: lightblue;
 }
+.theme1 .msg-box .msg-comments .msg-comments-tip {
+  border-left: 2px solid lightblue;
+  color: lightblue;
+}
+.theme1 .userinfo-box li span:nth-child(2) {
+  color: #65c8e9;
+}
+.theme1 .slider li a.active {
+  background: lightblue;
+}
+.theme1 .slider li a.active::after {
+  border-left: 15px solid lightblue;
+}
+.theme1 .lc-tab .sort-item.active {
+  color: lightblue;
+  border-bottom: 2px solid lightblue;
+}
+.theme1 .tcommonBox > header > h1 .aboutme {
+  color: lightblue;
+}
 .theme2 {
   /* 左上角类型标签格式 */
   /* 左上角日期格式 */
@@ -88,31 +111,34 @@
   /* iconfont */
 }
 .theme2 .ui.label {
-  color: red;
-  border-color: #f16389;
-  background-color: #f16389;
+  color: #eff3ff;
+  border-color: #efaece;
+  background-color: #efaece;
 }
 .theme2 .ui.label::after {
-  border-right-color: #edbcc9;
+  border-right-color: #7d7068;
 }
 .theme2 .ui.label a {
-  color: red;
+  color: #eff3ff;
 }
 .theme2 .tcommonBox .s-round-date {
-  color: red;
-  background: #f16389;
+  color: #eff3ff;
+  background: #efaece;
 }
 .theme2 .tcolors-bg {
-  background: #f16389;
+  background: #efaece;
 }
 .theme2 .tcolors-bg:hover {
-  background: #edbcc9;
+  background: #7d7068;
+}
+.theme2 .a-label {
+  color: #eff3ff;
 }
 .theme2 .a-label:hover {
   color: lightblue;
 }
 .theme2 .icon {
-  fill: red;
+  fill: #eff3ff;
 }
 .theme2 .nav-header .nav-link-item .box:hover .icon {
   fill: lightblue;
@@ -121,10 +147,10 @@
   color: lightblue;
 }
 .theme2 .nav-header .nav-link-item .box .icon {
-  fill: red;
+  fill: #eff3ff;
 }
 .theme2 .nav-header .nav-link-item .box a {
-  color: red;
+  color: #eff3ff;
 }
 .theme2 .nav-header .nav-link-item .sub-link .sub-link-item:hover .icon {
   fill: lightblue;
@@ -134,10 +160,10 @@
 }
 .theme2 .nav-header .nav-link-item .sub-link .sub-link-item .icon {
   margin-right: 4px;
-  fill: red;
+  fill: #eff3ff;
 }
 .theme2 .nav-header .nav-link-item .sub-link .sub-link-item a {
-  color: red;
+  color: #eff3ff;
 }
 .theme2 .nav-header .nav-link-item .sub-link .sub-link-item a:hover {
   color: lightblue;
@@ -145,22 +171,148 @@
 .theme2 .header-bg {
   background-image: url('~static/images/chunwu.jpg');
 }
-.theme2 .active {
-  background: deepskyblue !important;
-}
 .theme2 .artical-type .shareclassTwo li a {
-  background: lightblue;
+  background: #efaece;
+}
+.theme2 .artical-type .shareclassTwo .active {
+  background: #7d7068 !important;
 }
 .theme2 .article-box .like-col-box .like-box,
 .theme2 .article-box .like-col-box .collect-box {
-  color: red;
-  background: lightblue;
+  color: #eff3ff;
+  background: #efaece;
 }
 .theme2 .article-box .like-col-box .like-box:hover,
 .theme2 .article-box .like-col-box .collect-box:hover {
-  background: #c668d3;
+  background: #7d7068;
 }
 .theme2 .article-box .like-col-box .like-box.yes,
 .theme2 .article-box .like-col-box .collect-box.yes {
-  background: lightblue;
+  background: #efaece;
+}
+.theme2 .msg-box .msg-comments .msg-comments-tip {
+  border-left: 2px solid #efaece;
+  color: #efaece;
+}
+.theme2 .userinfo-box li span:nth-child(2) {
+  color: #efaece;
+}
+.theme2 .slider li a.active {
+  background: #efaece;
+}
+.theme2 .slider li a.active::after {
+  border-left: 15px solid #efaece;
+}
+.theme2 .lc-tab .sort-item.active {
+  color: #efaece;
+  border-bottom: 2px solid #efaece;
+}
+.theme2 .tcommonBox > header > h1 .aboutme {
+  color: #efaece;
+}
+.theme3 {
+  /* 左上角类型标签格式 */
+  /* 左上角日期格式 */
+  /* 阅读全文格式 */
+  /* iconfont */
+}
+.theme3 .ui.label {
+  color: #A04B52;
+  border-color: #BEACDC;
+  background-color: #BEACDC;
+}
+.theme3 .ui.label::after {
+  border-right-color: #7d7068;
+}
+.theme3 .ui.label a {
+  color: #A04B52;
+}
+.theme3 .tcommonBox .s-round-date {
+  color: #A04B52;
+  background: #BEACDC;
+}
+.theme3 .tcolors-bg {
+  background: #BEACDC;
+}
+.theme3 .tcolors-bg:hover {
+  background: #7d7068;
+}
+.theme3 .a-label {
+  color: #A04B52;
+}
+.theme3 .a-label:hover {
+  color: #4B9DAB;
+}
+.theme3 .icon {
+  fill: #A04B52;
+}
+.theme3 .nav-header .nav-link-item .box:hover .icon {
+  fill: #4B9DAB;
+}
+.theme3 .nav-header .nav-link-item .box:hover > a {
+  color: #4B9DAB;
+}
+.theme3 .nav-header .nav-link-item .box .icon {
+  fill: #A04B52;
+}
+.theme3 .nav-header .nav-link-item .box a {
+  color: #A04B52;
+}
+.theme3 .nav-header .nav-link-item .sub-link .sub-link-item:hover .icon {
+  fill: #4B9DAB;
+}
+.theme3 .nav-header .nav-link-item .sub-link .sub-link-item:hover > a {
+  color: #4B9DAB;
+}
+.theme3 .nav-header .nav-link-item .sub-link .sub-link-item .icon {
+  margin-right: 4px;
+  fill: #A04B52;
+}
+.theme3 .nav-header .nav-link-item .sub-link .sub-link-item a {
+  color: #A04B52;
+}
+.theme3 .nav-header .nav-link-item .sub-link .sub-link-item a:hover {
+  color: #4B9DAB;
+}
+.theme3 .header-bg {
+  background-image: url('~static/images/luren.jpg');
+}
+.theme3 .artical-type .shareclassTwo li a {
+  background: #C2C0E5;
+}
+.theme3 .artical-type .shareclassTwo .active {
+  background: #AD93D6 !important;
+}
+.theme3 .article-box .like-col-box .like-box,
+.theme3 .article-box .like-col-box .collect-box {
+  color: #A04B52;
+  background: #BEACDC;
+}
+.theme3 .article-box .like-col-box .like-box:hover,
+.theme3 .article-box .like-col-box .collect-box:hover {
+  background: #7d7068;
+}
+.theme3 .article-box .like-col-box .like-box.yes,
+.theme3 .article-box .like-col-box .collect-box.yes {
+  background: #BEACDC;
+}
+.theme3 .msg-box .msg-comments .msg-comments-tip {
+  border-left: 2px solid #BEACDC;
+  color: #BEACDC;
+}
+.theme3 .userinfo-box li span:nth-child(2) {
+  color: #BEACDC;
+}
+.theme3 .slider li a.active {
+  background: #BEACDC;
+}
+.theme3 .slider li a.active::after {
+  border-left: 15px solid #BEACDC;
+}
+.theme3 .lc-tab .sort-item.active {
+  color: #BEACDC;
+  border-bottom: 2px solid #BEACDC;
+}
+.theme3 .tcommonBox > header > h1 .aboutme {
+  color: #BEACDC;
 }

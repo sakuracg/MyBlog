@@ -9,20 +9,8 @@
         ><span class="timeJump">(●'◡'●)ﾉ♥</span>
       </p>
       <p>
-        托管于
-        <a href="javascript:;" target="_blank">GitHub</a>.
-        <a href="javascript:;" target="_blank">阿里云</a>
-        提供静态文件云存储服务.
-        <a href="javascript:;" target="_blank">百度统计</a>
-        提供网站统计服务.
-        <a href="javascript:;" target="_blank">CloudXNS</a>
-        提供 DNS 解析服务.
-      </p>
-      <p>
-        © 2018 <a href="#">Sakura</a>. 由
-        <a href="https://cn.vuejs.org/" target="_blank">Vue</a> 强力驱动. Theme
-        By <a href="https://diygod.me/" target="_blank">diygod.me</a>.
-        京ICP备17074595号-1.
+        © 2019 <a href="#">Sakura</a>. 由
+        <a href="https://cn.vuejs.org/" target="_blank">Vue</a> 强力驱动.       
       </p>
       <p>
         <span>Made with</span>
@@ -30,11 +18,6 @@
         <span>by Sakuracg.</span>
       </p>
     </div>
-    <!-- <div class="toTop1">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconfanhuidingbu"></use>
-      </svg>
-    </div> -->
   </div>
 </template>
 
@@ -170,7 +153,8 @@ export default {
   display: inline-block;
   margin: 0 5px;
 }
-@-webkit-keyframes my-face {
+
+@keyframes my-face {
   2% {
     -webkit-transform: translate(0, 1.5px) rotate(1.5deg);
     -moz-transform: translate(0, 1.5px) rotate(1.5deg);

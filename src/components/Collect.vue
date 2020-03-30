@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="lc-tab">      
+    <div class="lc-tab">
       <a
         href="javascript:;"
         :class="currentStyle === 0 ? 'sort-item active' : 'sort-item'"
@@ -56,7 +56,7 @@
             </div>
             <!-- 处理取消收藏 -->
             <div class="op">
-              <el-button round>
+              <el-button round @click="cancelLike(blog.id, 0, false)">
                 取消收藏
               </el-button>
             </div>
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { getAllArtCollect } from '../util/server'
+import { getAllArtCollect, updateArtLikeColl } from '../util/server'
 export default {
   name: 'Collect',
   data () {
@@ -77,8 +77,8 @@ export default {
       getTechCollect: [],
       getNovelCollect: [],
       getAnimeCollect: [],
-      currentCollect: [],   // 当前展示的喜欢 
-      currentStyle: 0,  // 展示当前的博客类型的样式     
+      currentCollect: [], // 当前展示的喜欢 
+      currentStyle: 0 // 展示当前的博客类型的样式     
     }
   },
   created () {
@@ -117,6 +117,14 @@ export default {
           this.getAnimeCollect.push(blog)
         }
       }
+    },
+    cancelLike (aid, type, status) {
+      updateArtLikeColl(aid, type, status, status, res => {
+        if (res.errorCode === 0) {
+          this.$message.success('已取消收藏')
+          this.getAllCollectBlog()
+        }
+      })
     }
   }
 }
@@ -124,6 +132,7 @@ export default {
 
 <style lang="less" scoped>
 .lc-tab {
+  padding-top: 14px;
   height: 48px;
   line-height: 48px;
   border-bottom: 1px solid #d9dde1;
@@ -132,10 +141,10 @@ export default {
   .sort-item {
     display: inline-block;
     margin-right: 64px;
-    &.active {
-      color: lightblue;
-      border-bottom: 2px solid lightblue;
-    }
+    // &.active {
+    // color: lightblue;
+    // border-bottom: 2px solid lightblue;
+    // }
   }
 }
 .all-blog-main {

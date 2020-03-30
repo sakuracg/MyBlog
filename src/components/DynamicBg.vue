@@ -26,17 +26,14 @@ export default {
       switch (this.$store.state.dynamicBg) {
         case '0':
           this.dynamicBg0()
-          console.log('0执行了')
           break
         case '1':
           this.dynamicBg1()
-          console.log('1执行了')
           break
         case '2':
           this.dynamicBg2()
           break
         default:
-          console.log('我是字符', this.$store.state.dynamicBg)
           break
       }
     },
@@ -55,54 +52,55 @@ export default {
       const ctx = canvas.getContext('2d')
       const w = canvas.width = canvas.offsetWidth
       const h = canvas.height = canvas.offsetHeight
-      window.requestAnimationFrame = window.requestAnimationFrame
-        || window.mozRequestAnimationFrame
-        || window.webkitRequestAnimationFrame
-        || window.msRequestAnimationFrame;
-      let circles = []
-      var current_circle = new Circle(0, 0, 'rgba(204, 204, 204, 0.4)');
+      window.requestAnimationFrame = window.requestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.msRequestAnimationFrame
+      let circles = []      
+      
+      var currentCircle = new Circle(0, 0, 'rgba(204, 204, 204, 0.4)')
 
       function init (num) {
         for (var i = 0; i < num; i++) {
-          circles.push(new Circle(Math.random() * w, Math.random() * h));
+          circles.push(new Circle(Math.random() * w, Math.random() * h))
         }
-        draw();
+        draw()
       }
 
       function draw () {
-        ctx.clearRect(0, 0, w, h);
+        ctx.clearRect(0, 0, w, h)
         for (let i = 0, len = circles.length; i < len; i++) {
-          circles[i].move(w, h);
-          circles[i].drawCircle(ctx);
+          circles[i].move(w, h)
+          circles[i].drawCircle(ctx)
           for (let j = i + 1; j < len; j++) {
-            circles[i].drawLine(ctx, circles[j]);
+            circles[i].drawLine(ctx, circles[j])
           }
         }
-        if (current_circle.getX()) {
-          current_circle.drawCircle(ctx);
+        if (currentCircle.getX()) {
+          currentCircle.drawCircle(ctx)
           for (let k = 0, len = circles.length; k < len; k++) {
-            current_circle.drawLine(ctx, circles[k])
+            currentCircle.drawLine(ctx, circles[k])
           }
         }
-        that.$store.state.dyWaterVal = requestAnimationFrame(draw);
+        that.$store.state.dyWaterVal = requestAnimationFrame(draw)
       }
       window.onload = init(60)
 
       window.onmousemove = function (e) {
-        e = e || window.event;
-        current_circle.setX(e.clientX);
-        current_circle.setY(e.clientY);
+        e = e || window.event
+        currentCircle.setX(e.clientX)
+        currentCircle.setY(e.clientY)
       }
       window.onmouseout = function () {
-        current_circle.setX(null);
-        current_circle.setY(null);
+        currentCircle.setX(null)
+        currentCircle.setY(null)
       }
     },
 
     dynamicBg2 () {
       this.dynamicBg0()
       Bubbly({
-        canvas: document.querySelector("#canvas"),   
+        canvas: document.querySelector('#canvas')
       })
     }
   }

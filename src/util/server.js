@@ -20,13 +20,13 @@ const InitDate = (oldDate, full) => {
     // console.log(oldDate.split('-')[0])
     let t = oldDate
     return t.split('-')[0] + '年' + t.split('-')[1] + '月' + t.split('-')[2] + '日'
-  } else if (full == 'year') {
+  } else if (full === 'year') {
     return year
-  } else if (full == 'month') {
+  } else if (full === 'month') {
     return odate.getMonth() + 1
-  } else if (full == 'date') {
+  } else if (full === 'date') {
     return date
-  } else if (full == 'newDate') {
+  } else if (full === 'newDate') {
     return year + '年' + month + '月' + date + '日'
   }
 }
@@ -43,18 +43,26 @@ const FormatDate = (date, type) => {
 // 登录
 const UserLogin = async (userInfo, callback) => {
   let url = 'token/login'
-  const res = await axios.post(url, userInfo)
-  callback && callback(res)
+  try {
+    const res = await axios.post(url, userInfo)
+    callback && callback(res)
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 // 验证token
 const VeriftToken = async (callback) => {
   const url = 'token/verify'
-  const { data: res } = await axios.post(url, {
-    'token': localStorage.getItem('token')
-  })
-  // Authorization: this._encode()
-  callback && callback(res)
+  try {
+    const { data: res } = await axios.post(url, {
+      'token': localStorage.getItem('token')
+    })
+
+    callback && callback(res)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 // 注册
@@ -119,8 +127,8 @@ const SaveUserImg = async (imageori, imageCurr, callback) => {
 }
 
 function _encode () {
-  const token = localStorage.getItem('token') ? localStorage.getItem('token') : ''
-  const base64 = Base64.encode(token + ':')
+  const token = localStorage.getItem('token') ? localStorage.getItem('token') : ''  
+  const base64 = Base64.encode(token + ':')  
   // Authorization:Basic base64
   return 'Basic ' + base64
 }
@@ -160,12 +168,12 @@ const GetArtical = async (mdUrl, callback) => {
 // 查询文章分类列表
 const ArticalCateList = (callback) => {
   if (sessionStorage.getItem('articalCateList')) {
-    let data = JSON.parse(sessionStorage.getItem('articalCateList'));
+    let data = JSON.parse(sessionStorage.getItem('articalCateList'))
     callback && callback(data)
   } else {
-    let url = 'blog/articalCateList';
+    let url = 'blog/articalCateList'
     axios.get(url).then(result => {
-      sessionStorage.setItem('articalCateList', JSON.stringify(result.data.data));
+      sessionStorage.setItem('articalCateList', JSON.stringify(result.data.data))
       callback && callback(result.data.data)
     })
   }
@@ -173,9 +181,14 @@ const ArticalCateList = (callback) => {
 
 // 查询浏览最多的十条博客
 const ShowBrowseMaxBlog = async (callback) => {
-  let url = 'blog/browse/maxlist'
-  const { data: res } = await axios.get(url)
-  callback && callback(res.data)
+  let url = 'blog/browse/maxlist'  
+  if (sessionStorage.getItem('lastestMessage')) {
+    callback && callback(JSON.parse(sessionStorage.getItem('browseMaxBlog')))
+  } else {
+    const { data: res } = await axios.get(url)
+    sessionStorage.setItem('browseMaxBlog', JSON.stringify(res.data))
+    callback && callback(res.data)
+  }
 }
 const updateArtLikeColl = async (aid, type, likeArt, collectArt, callback) => {
   let url = 'blog/'
@@ -265,7 +278,7 @@ const AddSendMessage = async (content, callback) => {
 }
 
 // 用户撤回留言
-const DelMessage = async(callback) =>{
+const DelMessage = async (callback) => {
   let url = 'message/delMessage'
   const { data: res } = await axios.post(url)
   callback && callback(res)
@@ -277,31 +290,45 @@ const ShowAllMessage = async (callback) => {
   const { data: res } = await axios.get(url)
   callback && callback(res)
 }
+
+// 得到留言板上的留言以及用户的部分信息
+const ShowLastestMessage = async (callback) => {
+  let url = 'message/lastest'
+  if (sessionStorage.getItem('lastestMessage')) {
+    callback && callback(JSON.parse(sessionStorage.getItem('lastestMessage')))
+  } else {
+    const { data: res } = await axios.get(url)
+    sessionStorage.setItem('lastestMessage', JSON.stringify(res))
+    callback && callback(res)
+  }
+}
+
 export {
-  InitDate,  // 格式化时间函数
-  GetArticalAll,  // 得到博客列表
-  GetArticalDeatil,  // 得到id为？的文章详情
-  GetArtical,     // 得到具体文章  
-  ShowBrowseMaxBlog,  // 显示博客浏览次数最大的十篇
-  ArticalCateList,  // 查询文章分类列表
+  InitDate, // 格式化时间函数
+  GetArticalAll, // 得到博客列表
+  GetArticalDeatil, // 得到id为？的文章详情
+  GetArtical, // 得到具体文章  
+  ShowBrowseMaxBlog, // 显示博客浏览次数最大的十篇
+  ArticalCateList, // 查询文章分类列表
   UserLogin, // 用户登录
-  Register,       // 注册
-  AlterInfo,    // 修改密码
-  FormatDate,     // 格式化日期
-  TransmitEmail,   // 发送邮件
-  VeriftToken,    // 验证token
-  GetUserInfo,     //  得到用户信息
-  SaveUserInfo,   // 保存用户信息
-  SaveUserImg,    // 保存用户图片
-  judgeUniqueUsername,   // 判断用户名是否唯一
-  updateArtLikeColl,   // 更新收藏和点赞
-  artCollect,  // 用户是否喜欢
-  artLike,    // 用户是否收藏
-  getAllArtLike,  // 得到用户所有的喜欢
+  Register, // 注册
+  AlterInfo, // 修改密码
+  FormatDate, // 格式化日期
+  TransmitEmail, // 发送邮件
+  VeriftToken, // 验证token
+  GetUserInfo, //  得到用户信息
+  SaveUserInfo, // 保存用户信息
+  SaveUserImg, // 保存用户图片
+  judgeUniqueUsername, // 判断用户名是否唯一
+  updateArtLikeColl, // 更新收藏和点赞
+  artCollect, // 用户是否喜欢
+  artLike, // 用户是否收藏
+  getAllArtLike, // 得到用户所有的喜欢
   getAllArtCollect, // 得到用户所有的收藏
-  sendArticalComment,  // 发送留言
-  getBlogAllComments,  // 得到博客所有的留言
-  AddSendMessage,  // 留言板的留言
-  ShowAllMessage,   // 得到所有留言板的留言
+  sendArticalComment, // 发送留言
+  getBlogAllComments, // 得到博客所有的留言
+  AddSendMessage, // 留言板的留言
+  ShowAllMessage, // 得到所有留言板的留言
   DelMessage, // 用户撤回先前的留言
+  ShowLastestMessage // 查询最新留言板的内容
 }

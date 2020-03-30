@@ -46,7 +46,7 @@
           :subfield="false"
           :boxShadow="false"
           defaultOpen="preview"
-          :toolbarsFlag="false"          
+          :toolbarsFlag="false"
         />
       </section>
       <div class="like-col-box">
@@ -72,25 +72,25 @@
 </template>
 <script>
 import { InitDate, FormatDate, GetArticalDeatil, GetArtical, updateArtLikeColl, artLike, artCollect } from '../util/server'
-import { mavonEditor } from "mavon-editor"
-import "mavon-editor/dist/css/index.css"
-import "mavon-editor/dist/highlightjs/styles/github.min.css"
+import { mavonEditor } from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+import 'mavon-editor/dist/highlightjs/styles/github.min.css'
 import { isMoment } from 'moment'
 export default {
   name: 'DetailArtical',
   components: {
-    mavonEditor,
+    mavonEditor
   },
   data () {
     return {
       aid: '', // 文章id
-      detailInfo: '',   // 文章详情      
+      detailInfo: '', // 文章详情      
       mdUrl: '',
       artical: '',
       likeArt: false,
       collectArt: false,
       likeCount: 400, // 点赞数量
-      collectCount: 40, // 收藏数量      
+      collectCount: 40 // 收藏数量      
     }
   },
   watch: {
@@ -117,7 +117,7 @@ export default {
         // console.log(res.data)
         that.likeCount = res.data.favorNums
         that.collectCount = res.data.collectNums
-        that.mdUrl = res.data.artical
+        that.mdUrl = res.data.article
         that.detailInfo = res.data
         that.articalShow()
 
@@ -135,24 +135,23 @@ export default {
       if (localStorage.getItem('userInfo')) {
         if (type) {
           if (!that.likeArt) {
-            that.likeCount += 1;
-            that.likeArt = true;
-            tip = '已点赞';
+            that.likeCount += 1
+            that.likeArt = true
+            tip = '已点赞'
           } else {
-            that.likeCount -= 1;
-            that.likeArt = false;
+            that.likeCount -= 1
+            that.likeArt = false
             tip = '已取消点赞'
           }
-
         } else {
           if (!that.collectArt) {
-            that.collectCount += 1;
-            that.collectArt = true;
-            tip = '已收藏';
+            that.collectCount += 1
+            that.collectArt = true
+            tip = '已收藏'
           } else {
-            that.collectCount -= 1;
-            that.collectArt = false;
-            tip = '已取消收藏';
+            that.collectCount -= 1
+            that.collectArt = false
+            tip = '已取消收藏'
           }
         }
         updateArtLikeColl(that.aid, type, that.likeArt, that.collectArt, res => {
@@ -186,9 +185,7 @@ export default {
       // let converter = new showdowm.Converter()
       if (this.mdUrl !== '') {
         GetArtical(this.mdUrl, res => {
-          let text = res.data
-          this.artical = text
-          // console.log(this.artical)       
+          this.artical = res.data
         })
       }
     }
@@ -217,11 +214,24 @@ export default {
 .article-box header h2 i {
   margin: 0 2px 0 4px;
 }
-.article-box .article-content {  
+.article-box .article-content {
+  width: 100%;
+  max-width: 680px !important;
   /deep/ .markdown-body pre code {
     font-size: 100%;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .article-box {
+    .article-content {
+      max-width: 375px !important;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
 // 点赞 收藏
 .article-box .like-col-box {
   position: absolute;

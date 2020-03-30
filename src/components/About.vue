@@ -2,7 +2,7 @@
   <div class="tcommonBox">
     <header>
       <h1>
-        <router-link :to="{ name: 'AboutMe' }">关于我</router-link>
+        <router-link :to="{ name: 'AboutMe' }" class="aboutme">关于我</router-link>
       </h1>
     </header>
     <section>
@@ -25,12 +25,12 @@ export default {
   h1 {
     margin: 40px 0;
     text-align: center;
-    a {
+    .aboutme {
       height: 24px;
       line-height: 24px;
       font-size: 22px;
       font-weight: 550;
-      color: lightblue;
+      // color: lightblue;
     }
   }
   section {

@@ -188,10 +188,10 @@ export default {
   data () {
     return {
       isEdit: false,
-      username: '',  // 当前的用户名
-      isSaveUpload: true,  // 是否可以提交信息
-      userInfo: '',  // 这玩意可以修改
-      userInfoObj: '',  // 还得重新获取      
+      username: '', // 当前的用户名
+      isSaveUpload: true, // 是否可以提交信息
+      userInfo: '', // 这玩意可以修改
+      userInfoObj: '', // 还得重新获取      
       userTabs: [
         { type: 1, name: '霞之丘派' },
         { type: 2, name: '雪乃党' },
@@ -211,7 +211,7 @@ export default {
       sexTab: [
         { name: '男' },
         { name: '女' },
-        { name: '保密' },
+        { name: '保密' }
       ]
     }
   },
@@ -220,15 +220,13 @@ export default {
     handleAvatarSuccess (res, file) {
       const that = this
       let data = res.data
-
       if (data.errorCode === 0) {
         that.userInfoObj.image = data.host + data.dir + '/' + data.filename
-        // 只更新图片
-        SaveUserImg(that.userInfo.image, that.userInfoObj.image, res => {
-          //   console.log(res)
+        // 只更新图片                
+        SaveUserImg(that.userInfo.image, that.userInfoObj.image, res => {          
           that.userInfoObj.image = res.data.image
-          localStorage.setItem('userInfo', JSON.stringify(that.userInfoObj))
-          that.userInfo = localStorage.getItem('userInfo')
+          localStorage.setItem('userInfo', JSON.stringify(that.userInfoObj))          
+          that.userInfo = JSON.parse(localStorage.getItem('userInfo'))
           that.$message.success('修改勇者照片成功')
         })
       }
@@ -247,8 +245,6 @@ export default {
     },
     // 用户名输入框离开事件
     removeEvent () {
-      // console.log(this.username)
-      // console.log(this.userInfoObj.username)
       const that = this
       if (this.username !== this.userInfoObj.username) {
         judgeUniqueUsername(this.userInfoObj.username, res => {
@@ -293,7 +289,6 @@ export default {
       } else {
         window.scrollTo(0, 670)
       }
-
     },
     routeChange () {
       const that = this
@@ -345,7 +340,7 @@ export default {
   },
   created () {
     this.routeChange()
-    this.username = this.userInfo.username
+    this.username = this.userInfo.username    
   }
 
 }
@@ -393,7 +388,7 @@ export default {
       border-bottom: 0;
     }
     span:nth-child(2) {
-      color: rgb(101, 200, 233);
+      // color: rgb(101, 200, 233);
     }
     .hero-avatar1 {
       img {
@@ -519,8 +514,10 @@ export default {
       }
     }
     /deep/ .el-radio-button__orig-radio:checked + .el-radio-button__inner {
-      background: #22a1d6 !important;
-      border-color: #22a1d6 !important;
+      background: lightblue !important;
+      border-color: lightblue !important;
+      color: #fff;
+      box-shadow: none;
     }
   }
 }

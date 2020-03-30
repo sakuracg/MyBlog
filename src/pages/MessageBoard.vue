@@ -128,29 +128,24 @@ export default {
   mounted () {
     this.$nextTick(() => {
     })
-
   },
   data () {
     return {
       swiperOption: {
         pagination: {
           el: '.swiper-pagination',
-          clickable: true,
+          clickable: true
         },
-        // autoplay: {
-        //   delay: 50000,
-        //   disableOnInteraction: false,
-        // },
         spaceBetween: 10,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         },
         effect: 'flip',
-        loop: true,
+        loop: true
       },
       messageText: '',
-      messages: [],
+      messages: []
     }
   },
   computed: {
@@ -181,9 +176,8 @@ export default {
         elLighL.removeAttribute('hidden')
         elLighR.removeAttribute('hidden')
         // 显示光线
-        elLighL.style.opacity = 0.8 - (0.9 * percentDoor) / 100;
-        elLighR.style.opacity = 0.8 - (0.9 * percentDoor) / 100;
-
+        elLighL.style.opacity = 0.8 - (0.9 * percentDoor) / 100
+        elLighR.style.opacity = 0.8 - (0.9 * percentDoor) / 100
         setTimeout(fnOpenDoor, 16)
       }
 
@@ -269,9 +263,9 @@ export default {
             TagCloud(boards[i], boards[i].children)
             // 改变面板的位置
             if ((i + 1) % 2 === 0) {                          
-              boards[i].style.left = "10%"
+              boards[i].style.left = '10%'
             } else {
-              boards[i].style.left = "44%"
+              boards[i].style.left = '44%'
             }
           }
           // console.log(timer)  timer 是不变的                   
@@ -281,8 +275,8 @@ export default {
     // 数组去重
     uniqe (arr) {
       return arr.reduce((prev, next) => {
-        prev[next] = (prev[next] + 1) || 1;
-        return prev;
+        prev[next] = (prev[next] + 1) || 1
+        return prev
       }, {})
     },
     // 分页处理

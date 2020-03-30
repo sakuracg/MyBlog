@@ -29,74 +29,92 @@
         </li>
       </ul>
     </div>
-    <article
-      class="article-list tcommonBox"
-      v-for="blog in blogList"
-      :key="'artical' + blog.id"
-    >
-      <span class="s-round-date">
-        <span
-          class="month"
-          v-html="showInitDate(blog.updated_at, 'month') + '月'"
-        ></span>
-        <span class="day" v-html="showInitDate(blog.updated_at, 'date')"></span>
-      </span>
-      <header>
-        <h1>
+    <div v-if="blogList.length">
+      <article
+        class="article-list tcommonBox"
+        v-for="blog in blogList"
+        :key="'artical' + blog.id"
+      >
+        <span class="s-round-date">
+          <span
+            class="month"
+            v-html="showInitDate(blog.updated_at, 'month') + '月'"
+          ></span>
+          <span
+            class="day"
+            v-html="showInitDate(blog.updated_at, 'date')"
+          ></span>
+        </span>
+        <header>
+          <h1>
+            <router-link
+              :to="{ name: 'Artical', params: { aid: blog.id } }"
+              target="_blank"
+            >
+              {{ blog.title }}
+            </router-link>
+          </h1>
+          <h2>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#iconshijian"></use></svg
+            >更新于
+            <span
+              style="margin-right: 4px;"
+              v-html="showFormatDate(blog.updated_at)"
+            ></span>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#iconliulan1"></use></svg
+            >{{ blog.browseNums }} 浏览
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icondianzan"></use></svg
+            >{{ blog.favorNums }} 点赞
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#iconshoucang"></use></svg
+            >{{ blog.collectNums }} 收藏
+          </h2>
+          <!-- 文章类型 -->
+          <div class="ui label">
+            <router-link
+              :to="{ name: 'ArticalType', params: { cateId: blog.cateId } }"
+            >
+              {{ blog.cateName }}
+            </router-link>
+          </div>
+        </header>
+        <!-- 文章内容 -->
+        <section class="article-content">
+          <p>
+            {{ blog.content }}
+          </p>
+          <p>
+            <img :src="blog.image" alt="图片" class="maxW" />
+          </p>
+        </section>
+        <!-- 文章细节 -->
+        <div class="view-detail">
           <router-link
+            class="tcolors-bg"
             :to="{ name: 'Artical', params: { aid: blog.id } }"
             target="_blank"
+            >阅读全文>></router-link
           >
-            {{ blog.title }}
-          </router-link>
-        </h1>
-        <h2>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#iconshijian"></use></svg
-          >更新于
-          <span style="margin-right: 4px;" v-html="showFormatDate(blog.updated_at)"></span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#iconliulan1"></use></svg
-          >{{ blog.browseNums }} 浏览
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icondianzan"></use></svg
-          >{{ blog.favorNums }} 点赞
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#iconshoucang"></use></svg
-          >{{ blog.collectNums }} 收藏
-        </h2>
-        <!-- 文章类型 -->
-        <div class="ui label">
-          <router-link
-            :to="{ name: 'ArticalType', params: { cateId: blog.cateId } }"
-          >
-            {{ blog.cateName }}
-          </router-link>
         </div>
-      </header>
-      <!-- 文章内容 -->
-      <section class="article-content">
-        <p>
-          {{ blog.content }}
-        </p>
-        <p>
-          <img :src="blog.image" alt="图片" class="maxW" />
-        </p>
-      </section>
-      <!-- 文章细节 -->
-      <div class="view-detail">
-        <router-link
-          class="tcolors-bg"
-          :to="{ name: 'Artical', params: { aid: blog.id } }"
-          target="_blank"
-          >阅读全文>></router-link
-        >
-      </div>
-    </article>
-    <h1 v-show="hasMore" class="tcolors-bg more" @click="addMoreFun">
-      查看更多
-    </h1>
-    <h1 v-show="!hasMore" class="tcolors-bg more">没有更多</h1>
+      </article>
+      <h1 v-show="hasMore" class="tcolors-bg more" @click="addMoreFun">
+        查看更多
+      </h1>
+      <h1 v-show="!hasMore" class="tcolors-bg more">没有更多</h1>
+    </div>
+    <div v-else-if="!loading" class="nothing-res">
+      <span>没有资源哟~</span>
+    </div>
+    <div v-show="loading" class="loading">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </template>
 
@@ -111,13 +129,14 @@ export default {
       //   timeFormal: window.location.origin + window.location.pathname,
       //   文章类型id
       articalTypeId: 0, // 当前的文章类型ID
-      articalTypeSecId: 0,  // 二级分类ID
+      articalTypeSecId: 0, // 二级分类ID
       articalTypeName: '',
-      articalSecTypeList: '',  // 当前文章二级分类的ID
+      articalSecTypeList: '', // 当前文章二级分类的ID
       hasMore: true,
       pageId: 1,
       pageSize: 8,
       keywords: '',
+      loading: true,
       blogCate: [
         {
           cateId: 1,
@@ -125,8 +144,11 @@ export default {
           cateChild: [
             { cateId: 11, cateName: '小程序', pid: 1 },
             { cateId: 12, cateName: '移动端', pid: 1 },
-            { cateId: 13, cateName: 'PC端', pid: 1 },
-            { cateId: 14, cateName: 'Node.js', pid: 1 }
+            { cateId: 13, cateName: 'HTML5', pid: 1 },
+            { cateId: 14, cateName: 'CSS3', pid: 1 },
+            { cateId: 15, cateName: 'JavaScript', pid: 1 },
+            { cateId: 16, cateName: 'Node.js', pid: 1 },
+            { cateId: 17, cateName: 'Vue.js', pid: 1 }
           ]
         },
         { cateId: 2, name: '个人小说', cateChild: [{ cateId: 21, cateName: '我的小说', pid: 2 }] },
@@ -139,7 +161,7 @@ export default {
             { cateId: 33, cateName: '番剧吐槽', pid: 3 }
           ]
         }
-      ],
+      ]
     }
   },
   watch: {
@@ -161,26 +183,25 @@ export default {
     },
     //   路由有变化则执行该方法
     showSearchShowList (more) {
-      //   console.log(this.$route)
       let that = this
-      that.articalTypeId = (that.$route.params.cateId == undefined ? null : parseInt(that.$route.params.cateId))
-      that.articalTypeSecId = (that.$route.params.cateSecId == undefined ? null : parseInt(that.$route.params.cateSecId))
+      that.articalTypeId = (that.$route.params.cateId === undefined ? null : parseInt(that.$route.params.cateId))
+      that.articalTypeSecId = (that.$route.params.cateSecId === undefined ? null : parseInt(that.$route.params.cateSecId))
       if (that.$route.query.keywords) {
         that.keywords = that.$store.state.keywords
       } else {
         that.keywords = ''
       }
-      //   console.log(that.$route)
-      this.getSecondaryIds()   // 获取二级分类      
-      //获取传参的classId
+      this.getSecondaryIds() // 获取二级分类      
+      // 获取传参的classId
       //   查看是否获取更多
       this.pageId = more ? 1 : this.pageId + 1
       GetArticalAll(that.articalTypeId, that.articalTypeSecId, that.keywords, that.pageId, that.pageSize, res => {
         if (res.errCode === 10404) {
           return that.$message.error('请求博客列表失败')
         }
+        this.loading = false
         let info = res.data
-        if (info.length > 0 && info.length < 8) {
+        if (res.total === that.blogList.length) {          
           that.hasMore = false
         } else {
           that.hasMore = true
@@ -212,9 +233,6 @@ export default {
 
 <style lang="less" scoped>
 // 二级分类的样式
-.active {
-  background: deepskyblue !important;
-}
 .artical-type {
   margin-bottom: 50px;
   padding: 15px;
@@ -230,13 +248,16 @@ export default {
         padding: 7px;
         color: #fff;
         border-radius: 4px;
-        background: lightblue;
+        // background: lightblue;
         transition: all 0.2s;
         &:hover {
           transform: translateY(-3px);
         }
       }
     }
+    // .active {
+    // background: deepskyblue !important;
+    // }
   }
 }
 
