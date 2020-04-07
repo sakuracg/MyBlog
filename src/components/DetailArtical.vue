@@ -4,11 +4,11 @@
       <span class="s-round-date">
         <span
           class="month"
-          v-html="showInitDate(detailInfo.updated_at, 'month') + '月'"
+          v-html="showInitDate(detailInfo.created_at, 'month') + '月'"
         ></span>
         <span
           class="day"
-          v-html="showInitDate(detailInfo.updated_at, 'date')"
+          v-html="showInitDate(detailInfo.created_at, 'date')"
         ></span>
       </span>
       <header>
@@ -22,10 +22,8 @@
         </h1>
         <h2>
           <i class="iconfont iconshijian"></i>更新于
-          {{ showFormatDate(detailInfo.updated_at) }}
-          <i class="iconfont iconliulan"></i>{{ detailInfo.browseNums }} 浏览
-          <i class="iconfont iconliuyanxiaoxi"></i>
-          {{ detailInfo.messageNums }} 留言
+          {{ showFormatDate(detailInfo.created_at) }}
+          <i class="iconfont iconliulan"></i>{{ detailInfo.browseNums }} 浏览          
           <i class="iconfont iconzan"></i>
           {{ detailInfo.favorNums }} 点赞
           <i class="iconfont iconshoucang"></i>
@@ -75,7 +73,6 @@ import { InitDate, FormatDate, GetArticalDeatil, GetArtical, updateArtLikeColl, 
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import 'mavon-editor/dist/highlightjs/styles/github.min.css'
-import { isMoment } from 'moment'
 export default {
   name: 'DetailArtical',
   components: {

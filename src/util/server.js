@@ -1,7 +1,5 @@
 // 链接服务端代码
-import Vue from 'vue'
 import axios from 'axios'
-import moment from 'moment'
 import {
   Base64
 } from 'js-base64'
@@ -11,7 +9,7 @@ axios.defaults.headers.common['Authorization'] = _encode()
 // Vue.prototype.$http = axios
 // 格式化时间
 const InitDate = (oldDate, full) => {
-  oldDate = moment(oldDate).format('YYYY-MM-DD')
+  // oldDate = moment(oldDate).format('YYYY-MM-DD')  
   let odate = new Date(oldDate)
   let year = odate.getFullYear()
   let month = odate.getMonth() < 9 ? '0' + (odate.getMonth() + 1) : odate.getMonth() + 1
@@ -30,12 +28,30 @@ const InitDate = (oldDate, full) => {
     return year + '年' + month + '月' + date + '日'
   }
 }
-
-const FormatDate = (date, type) => {
+function dateFormat (fmt, date) {
+  let ret
+  const opt = {
+    'Y+': date.getFullYear().toString(),       
+    'M+': (date.getMonth() + 1).toString(),   
+    'D+': date.getDate().toString(),           
+    'h+': date.getHours().toString(),       
+    'm+': date.getMinutes().toString(),        
+    's+': date.getSeconds().toString()       
+    // 有其他格式化字符需求可以继续添加，必须转化成字符串
+  }
+  for (let k in opt) {
+    ret = new RegExp('(' + k + ')').exec(fmt)
+    if (ret) {
+      fmt = fmt.replace(ret[1], (ret[1].length === 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, '0')))
+    }
+  }
+  return fmt
+}
+const FormatDate = (date, type) => {    
   if (type) {
-    date = moment(date).format('YYYY-MM-DD HH:mm:ss')
+    date = dateFormat('YYYY-MM-DD hh:mm:ss', new Date(date))
   } else {
-    date = moment(date).format('YYYY-MM-DD')
+    date = dateFormat('YYYY-MM-DD', new Date(date))
   }
   return date
 }
@@ -61,7 +77,6 @@ const VeriftToken = async (callback) => {
 
     callback && callback(res)
   } catch (error) {
-    console.log(error)
   }
 }
 
@@ -69,7 +84,6 @@ const VeriftToken = async (callback) => {
 const Register = async (registerInfo, callback) => {
   let url = 'user/register'
   const { data: res } = await axios.post(url, registerInfo)
-  console.log(res)
   callback && callback(res)
 }
 
@@ -77,7 +91,6 @@ const Register = async (registerInfo, callback) => {
 const AlterInfo = async (alterInfo, callback) => {
   let url = 'user/alterpass'
   const { data: res } = await axios.post(url, alterInfo)
-  console.log(res)
   callback && callback(res)
 }
 
@@ -87,7 +100,6 @@ const TransmitEmail = async (email, callback) => {
   const { data: res } = await axios.post(url, {
     email
   })
-  console.log(res)
   callback && callback(res)
 }
 
@@ -117,8 +129,6 @@ const SaveUserInfo = async (userInfo, callback) => {
 // 更改用户头像
 const SaveUserImg = async (imageori, imageCurr, callback) => {
   let url = 'user/update/img'
-  console.log(imageori)
-  console.log(imageCurr)
   const { data: res } = await axios.post(url, {
     image: imageCurr,
     oimage: imageori
@@ -127,8 +137,8 @@ const SaveUserImg = async (imageori, imageCurr, callback) => {
 }
 
 function _encode () {
-  const token = localStorage.getItem('token') ? localStorage.getItem('token') : ''  
-  const base64 = Base64.encode(token + ':')  
+  const token = localStorage.getItem('token') ? localStorage.getItem('token') : ''
+  const base64 = Base64.encode(token + ':')
   // Authorization:Basic base64
   return 'Basic ' + base64
 }
@@ -136,16 +146,22 @@ function _encode () {
 // 处理文章列表请求  数多处理参  
 const GetArticalAll = async (atId, atSecId, keywords, pageId, pageSize, callback) => {
   let url = 'blog/list'
-  const { data: res } = await axios.get(url, {
-    params: {
-      cateId: atId,
-      cateSecId: atSecId,
-      keywords,
-      pageId,
-      pageSize
-    }
-  })
-  callback && callback(res)
+  try {
+    const { data: res } = await axios.get(url, {
+      params: {
+        cateId: atId,
+        cateSecId: atSecId,
+        keywords,
+        pageId,
+        pageSize
+      }
+    })
+    callback && callback(res)
+  } catch (err) {
+    const res = {}
+    res.errCode = 10404
+    callback && callback(res)
+  }
 }
 
 // 查询文章详情
@@ -181,7 +197,7 @@ const ArticalCateList = (callback) => {
 
 // 查询浏览最多的十条博客
 const ShowBrowseMaxBlog = async (callback) => {
-  let url = 'blog/browse/maxlist'  
+  let url = 'blog/browse/maxlist'
   if (sessionStorage.getItem('lastestMessage')) {
     callback && callback(JSON.parse(sessionStorage.getItem('browseMaxBlog')))
   } else {

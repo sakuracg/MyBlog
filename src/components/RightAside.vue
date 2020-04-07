@@ -2,7 +2,7 @@
   <div class="right-box">
     <section>
       <div class="card-head">
-        <img :src="'http://localhost:8080/img/1.jpg'" alt="" />
+        <img v-lazy="'http://60.205.247.74:8089/others/userinfo.jpg'" alt="" />
         <h1>
           <span>Sakuracg</span>
         </h1>
@@ -61,10 +61,10 @@
           :key="index"
         >          
           <div class="message-avatar">
-            <img :src="item.user.image" alt="~static/images/avator.jpg" />
+            <img v-lazy="item.user.image" alt="~static/images/avator.jpg" />
           </div>
           <div class="message-content">
-            <p class="content-author">{{ item.user.username }}}</p>
+            <p class="content-author">{{ item.user.username }}</p>
             <p class="content-text">{{ item.content }}</p>
           </div>
         </li>

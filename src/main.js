@@ -9,10 +9,13 @@ import './assets/styles/globle.css'
 import './assets/styles/fonticon/iconfont.css'
 import './assets/styles/subject.less'
 import './util/iconfont'
-import Highlight from './util/highlight'
+import VueLazyload from 'vue-lazyload'
 
 Vue.config.productionTip = false
-Vue.use(Highlight)
+Vue.use(VueLazyload, {
+  loading: 'dist/loading.gif',
+  error: 'dist/404.jpg' // 加载失败图片
+})
 
 new Vue({
   router,

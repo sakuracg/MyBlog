@@ -87,7 +87,7 @@
             {{ blog.content }}
           </p>
           <p>
-            <img :src="blog.image" alt="图片" class="maxW" />
+            <img v-lazy="blog.image" alt="图片" class="maxW" />
           </p>
         </section>
         <!-- 文章细节 -->
@@ -196,17 +196,17 @@ export default {
       //   查看是否获取更多
       this.pageId = more ? 1 : this.pageId + 1
       GetArticalAll(that.articalTypeId, that.articalTypeSecId, that.keywords, that.pageId, that.pageSize, res => {
-        if (res.errCode === 10404) {
-          return that.$message.error('请求博客列表失败')
-        }
         this.loading = false
+        if (res.errCode === 10404) {
+          return that.$message.success('没有博客哟~')
+        }
         let info = res.data
-        if (res.total === that.blogList.length) {          
+        that.blogList = more ? info : that.blogList.concat(info)
+        if (res.total === that.blogList.length || res.total < this.pageSize) {
           that.hasMore = false
         } else {
           that.hasMore = true
         }
-        that.blogList = more ? info : that.blogList.concat(info)
       })
     },
     // 查询一级分类下的二级分类ID以及名字

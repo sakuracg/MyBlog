@@ -1,8 +1,12 @@
 <template>
-  <div class="footBack footBackQian">
-    <div class="footer-img">
-      <img src="~static/images/footer.png" alt="" />
+  <div class="footBack">
+    <div v-if="isMobile" class="footer-img">
+      <img v-lazy="'http://60.205.247.74:8089/others/footer.png'" alt="" />
     </div>
+    <div
+      v-else
+      class="footer-img mobile"      
+    ></div>
     <div class="fcontainer">
       <p>
         博客已萌萌哒运行<span>{{ runtimes }}</span
@@ -10,11 +14,11 @@
       </p>
       <p>
         © 2019 <a href="#">Sakura</a>. 由
-        <a href="https://cn.vuejs.org/" target="_blank">Vue</a> 强力驱动.       
+        <a href="https://cn.vuejs.org/" target="_blank">Vue</a> 强力驱动.
       </p>
       <p>
         <span>Made with</span>
-        <img class="fheart" src="~static/images/1.jpg" />
+        <img class="fheart" v-lazy="'http://60.205.247.74:8089/others/avatar.jpg'" />
         <span>by Sakuracg.</span>
       </p>
     </div>
@@ -22,15 +26,19 @@
 </template>
 
 <script>
+import { _isMobile } from '../util/globle'
 export default {
   name: 'Footer',
   data () {
     return {
-      runtimes: ''
+      runtimes: '',
+      isMobile: true
     }
   },
   created () {
     this.runTime()
+    this.isMobile = !(/Android|webOS|iPhone|iPod|BlackBerry/i).test(navigator.userAgent)
+    // console.log((/Android|webOS|iPhone|iPod|BlackBerry/i).test(navigator.userAgent))
   },
   methods: {
     runTime () {
@@ -53,14 +61,12 @@ export default {
 <style lang="less" scoped>
 .footBack {
   color: #888;
-  margin-top: -10px;
   font-size: 12px;
   line-height: 1.5;
   text-align: center;
   width: 100%;
   min-height: 50px;
   margin-top: -25px;
-  position: absolute;
 }
 .footBack .fcontainer {
   width: 100%;
@@ -69,49 +75,21 @@ export default {
   box-sizing: border-box;
 }
 .footBack .footer-img {
-  height: 368px;
+  height: 430px;
   z-index: 1;
   position: relative;
-  bottom: -74px;
+  bottom: -80px;
   width: 100%;
-  pointer-events: none;
-}
-
-// .toTop1 {
-//   position: fixed;
-//   bottom: 100px;
-//   left: 300px;
-//   width: 100px;
-//   height: 100px;
-//   font-size: 28px;
-//   .icon {
-//       color: lightblue;
-//   }
-// }
-
-@media screen and (max-width: 768px) {
-  .footBack {
+  // pointer-events: none;
+  img {
     width: 100%;
-    height: 400px;
-    margin-top: -25px;
-    position: absolute;
-  }
-  .footBack .fcontainer {
-    position: relative;
-    bottom: 74px;
-    background: #232323;
-    padding: 15px 10px 10px 10px;
-    box-sizing: border-box;
-  }
-  .footBack .footer-img {
-    height: 368px;
-    z-index: 1;
-    bottom: 0px;
-    position: relative;
-    width: 100%;
-    pointer-events: none;
+    height: 430px;
   }
 }
+.footBack .mobile {
+  background: url("~static/images/footer.png") no-repeat 50%;
+}
+
 /*心脏呼吸*/
 .footBack .fheart {
   width: 25px;
@@ -125,17 +103,6 @@ export default {
   animation: heartScale 1.33s ease-in-out infinite;
 }
 @keyframes heartScale {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.8);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-@-webkit-keyframes heartScale {
   0% {
     transform: scale(1);
   }

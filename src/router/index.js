@@ -4,21 +4,22 @@ import store from '../store/index'
 
 Vue.use(VueRouter)
 
-
 const routes = [
   {
     path: '/',
     name: 'Home',
     meta: {
-      auth: true
+      auth: true,
+      title: '沫雪没有夏'
     },
-    component: resolve => require(['../pages/Home.vue'], resolve),   
+    component: resolve => require(['../pages/Home.vue'], resolve)
   },
   {
     path: '/Artical/:aid',
     name: 'Artical',
     meta: {
-      auth: true
+      auth: true,
+      title: '沫雪没有夏'
     },
     component: resolve => require(['../pages/Artical.vue'], resolve)
   },
@@ -26,7 +27,8 @@ const routes = [
     path: '/ArticalType/:cateId',
     name: 'ArticalType',
     meta: {
-      auth: true
+      auth: true,
+      title: '沫雪没有夏'
     },
     component: resolve => require(['../pages/ArticalType.vue'], resolve)
   },
@@ -34,7 +36,8 @@ const routes = [
     path: '/ArticalType/:cateId/:cateSecId',
     name: 'ArticalTypeSec',
     meta: {
-      auth: true
+      auth: true,
+      title: '沫雪没有夏'
     },
     component: resolve => require(['../pages/ArticalType.vue'], resolve)
   },
@@ -42,7 +45,8 @@ const routes = [
     path: '/ArticalType',
     name: 'ArticalTypeKeyWords',
     meta: {
-      auth: true
+      auth: true,
+      title: '沫雪没有夏'
     },
     component: resolve => require(['../pages/ArticalType.vue'], resolve)
   },
@@ -50,18 +54,27 @@ const routes = [
     path: '/Login/:type',
     name: 'Login',
     meta: {
-      auth: true
+      auth: true,
+      title: '沫雪没有夏'
     },
     component: resolve => require(['../pages/Login.vue'], resolve)
   },
   {
     path: '/UserInfo',
     name: 'UserInfo',
+    meta: {
+      auth: true,
+      title: '沫雪没有夏'
+    },
     component: resolve => require(['../pages/UserInfo.vue'], resolve)
   },
   {
     path: '/LikeCollect',
     name: 'LikeCollect',
+    meta: {
+      auth: true,
+      title: '沫雪没有夏'
+    },
     component: resolve => require(['../pages/LikeCollect.vue'], resolve),
     children: [
       {
@@ -79,11 +92,19 @@ const routes = [
   {
     path: '/MessageBoard',
     name: 'MessageBoard',
+    meta: {
+      auth: true,
+      title: '沫雪没有夏'
+    },
     component: resolve => require(['../pages/MessageBoard.vue'], resolve)
   },
   {
     path: '/Aboutme',
     name: 'AboutMe',
+    meta: {
+      auth: true,
+      title: '沫雪没有夏'
+    },
     component: resolve => require(['../pages/AboutMe.vue'], resolve)
   }
 ]
@@ -94,7 +115,7 @@ const router = new VueRouter({
     if (savedPosition) {
       return savedPosition
     } else {
-      var top;
+      var top
       if (window.innerWidth >= 700) {
         top = 670
       } else {
@@ -108,6 +129,12 @@ const router = new VueRouter({
   },
   mode: 'history'
 })
+
+router.beforeEach((to, form, next) => {
+  document.title = to.meta.title ? to.meta.title : '沫雪没有夏'
+  next()
+})
+
 router.afterEach((to, from) => {
   if (from.name === 'Login') {
     store.state.refresh = true

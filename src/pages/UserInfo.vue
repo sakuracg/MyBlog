@@ -222,7 +222,7 @@ export default {
       let data = res.data
       if (data.errorCode === 0) {
         that.userInfoObj.image = data.host + data.dir + '/' + data.filename
-        // 只更新图片                
+        // 只更新图片                      
         SaveUserImg(that.userInfo.image, that.userInfoObj.image, res => {          
           that.userInfoObj.image = res.data.image
           localStorage.setItem('userInfo', JSON.stringify(that.userInfoObj))          

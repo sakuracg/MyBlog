@@ -1,3 +1,4 @@
+/* eslint-disable vue/no-parsing-error */
 <template>
   <div>
     <div class="nav-header">
@@ -139,7 +140,9 @@
               <a href="javascript:;">实验室</a>
             </div>
             <ul class="sub-link clearfix">
-              <li class="sub-link-item" style="color: lightblue;">更多功能见电脑端</li>
+              <li class="sub-link-item" style="color: lightblue;">
+                更多功能见电脑端
+              </li>
             </ul>
           </li>
           <li class="nav-link-item-m">
@@ -230,7 +233,7 @@
       v-else
       :class="gotoTop ? 'toTophui' : 'toTophui goTophui'"
       @click="toTopfun"
-    >
+    >      
       <img src="~static/images/scroll.png" alt="" />
     </div>
   </div>
@@ -263,6 +266,21 @@ export default {
     '$route': 'routeChange'
   },
   created () {
+    // 判断页面是否隐藏    
+    let hiddenProperty = 'hidden' in document ? 'hidden'
+      : 'webkitHidden' in document ? 'webkitHidden'
+        : 'mozHidden' in document ? 'mozHidden'
+          : null
+    let visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange')
+    let onVisibilityChange = function () {
+      if (document[hiddenProperty]) { // 被隐藏
+        document.title = '主银，俺等你~'
+      } else {
+        document.title = '主银，你回来啦~' // 当前窗口打开       
+      }
+    }
+    document.addEventListener(visibilityChangeEvent, onVisibilityChange)
+
     this.isMobile = _Mobile()
     //   更换头部图片
     this.$nextTick(() => {

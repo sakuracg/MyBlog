@@ -36,7 +36,7 @@
             :key="'comment' + index"
           >
             <section>
-              <img :src="item.image" alt="图片不存在" class="inline-block" />
+              <img v-lazy="item.image" alt="图片不存在" class="inline-block" />
               <div class="item-content inline-block">
                 <div class="username inline-block">{{ item.username }}</div>
                 <div class="user-tab inline-block">
